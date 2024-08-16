@@ -1,0 +1,147 @@
+.CajaRegistro {
+  display: block;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.formulario ::placeholder {
+  color: rgb(255, 255, 255, 0.6);
+  text-align: center;
+  font-size: 20px;
+}
+
+/* Estilos de la imagen del ícono */
+.iconLogin {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+}
+
+/* Estilos de la caja de texto */
+.cajaTexto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-left: 15px;
+  border-radius: 5px;
+}
+
+/* Estilos de la caja de información */
+.cajaInfo {
+  height: 50px;
+  width: 320px; /* Asegura que ocupe el ancho completo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estilos del formulario y los inputs */
+form,
+input {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: none;
+  width: 335px;
+  color: white;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+form button {
+  background-color: yellowgreen;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+form button:hover {
+  background-color: darkgreen;
+}
+.check {
+  width: 25px;
+  height: 25px;
+}
+.formulario {
+  width: 325px;
+  border-radius: 10px 10px;
+  background-color: var(--colorOver);
+  padding: 10px 10px;
+  text-align: center;
+}
+.cajaInfo input {
+  width: 25px;
+}
+.cajaInfo {
+  width: 100%;
+}
+
+/* Responsividad para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .CajaRegistro {
+    font-size: 32px;
+    border-radius: 15px 15px 15px 15px;
+    text-align: center;
+  }
+  .iconLogin {
+    width: 120px;
+    height: 120px;
+  }
+  .formulario ::placeholder {
+    font-size: 28px;
+  }
+
+  .formulario input {
+    height: 80px;
+    width: 100%;
+  }
+  form,
+  input {
+    text-align: center;
+    font-size: 28px;
+  }
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 15px;
+    width: 600px;
+    height: 600px;
+  }
+  .cajaTexto img {
+    width: 60px;
+    height: 60px;
+  }
+  .cajaInfo input {
+    width: 40px;
+  }
+  .cajaInfo {
+    width: 100%;
+  }
+}
+
+/* Responsividad para pantallas más grandes */
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .header {
+    top: 0;
+    bottom: auto;
+  }
+
+  .menu {
+    top: 100px; /* Mueve el menú debajo del header en pantallas más grandes */
+  }
+}

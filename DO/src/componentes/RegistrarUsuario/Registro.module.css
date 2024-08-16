@@ -1,0 +1,99 @@
+/* Estilos generales */
+.contenedorFormulario {
+  width: 100%;
+  display: block;
+  justify-content: center;
+  border-radius: 15px 15px;
+}
+
+.formularioRegistro {
+  display: inline-block;
+  background-color: var(--colorOver);
+  width: 360px;
+  height: auto;
+  font-size: 30px;
+  text-align: center;
+  padding: 15px 15px;
+  gap: 50px;
+  align-items: center;
+  align-content: center;
+  overflow: hidden;
+  margin-top: 100px;
+  margin-bottom: 500px;
+}
+
+.contenedorLogo img {
+  width: 80px;
+  height: 80px;
+}
+
+.grupoEntrada {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  background-color: rgb(255, 255, 255, 0.3);
+  margin: 10px 10px;
+  padding: 5px 5px;
+  align-items: center;
+  border-radius: 5px 5px;
+}
+.grupoEntrada label {
+  width: 50px;
+  margin: 5px 5px;
+  text-transform: uppercase;
+  font-family: "Arial Narrow Bold", sans-serif;
+}
+.grupoEntrada input {
+  width: 190px;
+  display: flex;
+  text-align: center;
+}
+
+/* Estilos adicionales para los placeholders */
+.grupoEntrada ::placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.664);
+  font-size: 16px;
+}
+
+.botonEnviar {
+  background-color: yellowgreen;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.botonEnviar:hover {
+  background-color: darkgreen;
+}
+
+/* Responsividad para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .formularioRegistro {
+    width: 705px;
+    height: 742px;
+    margin-top: 150px;
+    background-color: rgb(20, 45, 70, 0.69);
+  }
+  .cajaEntrada {
+  }
+  .grupoEntrada {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* Responsividad para pantallas más grandes */
+@media (min-width: 1024px) and (max-width: 1400px) {
+  .header {
+    top: 0;
+    bottom: auto;
+  }
+
+  .menu {
+    top: 100px; /* Mueve el menú debajo del header en pantallas más grandes */
+  }
+}

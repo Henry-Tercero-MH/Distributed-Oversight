@@ -1,0 +1,24 @@
+.cajaTexto {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  background-color: var(--colorFondoTexto);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 60px;
+  overflow: hidden;
+}
+.cajaTexto span {
+  width: 190px;
+  display: flex;
+  justify-content: center;
+}
+.cajaTexto label {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  width: 100px;
+}
