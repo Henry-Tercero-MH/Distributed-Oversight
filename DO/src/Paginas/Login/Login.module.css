@@ -121,6 +121,7 @@ form button:hover {
     padding: 15px;
     width: 600px;
     height: 600px;
+    background-color: var(--colorOver);
   }
   .cajaTexto img {
     width: 60px;
