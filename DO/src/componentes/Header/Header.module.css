@@ -2,7 +2,7 @@
   width: 100%;
   height: 80px;
   position: fixed; /* Cambiado de absolute a fixed */
-  background: #34c759;
+  background-color: var(--coloHeader);
   bottom: 0; /* Alineado al top en lugar de bottom */
   left: 0;
   font-size: 32px;
@@ -33,6 +33,14 @@
   height: 50px;
 }
 
+.iconMenu:hover {
+  background-color: rgb(240, 248, 255, 0.5);
+  box-shadow: 0 0 0 5px aliceblue; /* Círculo alrededor del icono */
+  transition: all 0.3s ease; /* Para una transición suave */
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+}
 .cajaHeader {
   display: flex;
   justify-content: space-between;
@@ -45,8 +53,7 @@
   display: block;
   justify-content: center;
   position: absolute;
-  top: 80px; /* Mueve el menú debajo del header */
-  background-color: var(--colorOver);
+  background-color: var(--colorOverMenu);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 400px;
@@ -55,6 +62,8 @@
   align-content: center;
   gap: 55px;
   margin-bottom: 100px;
+  margin-top: 100px;
+  box-shadow: var(--box-shadow);
 }
 
 .menuList {
@@ -128,12 +137,15 @@
 @media (max-width: 767px) {
   .menu {
     position: fixed;
-    top: 80px; /* Ajusta según la altura del header */
+    top: 0px; /* Ajusta según la altura del header */
     left: 0;
     right: 0;
     width: 100%;
-    height: auto;
+    height: 450px;
     display: block;
-    background-color: var(--colorOver);
+    background-color: var(--colorOverMenu);
+  }
+  .menuList {
+    text-align: center;
   }
 }

@@ -7,6 +7,7 @@ import "./index.css";
 import Header from "./componentes/Header/Header";
 import Contenedor from "./componentes/Contenedor/Contenedor";
 import RegistroUsuario from "./componentes/RegistrarUsuario/Registro";
+import Reset from "./componentes/RestablecerContraseña/ResetPassword";
 
 const App = () => {
   return (
@@ -14,11 +15,12 @@ const App = () => {
       <Contenedor>
         <Header />
         <Routes>
-          <Route path="/Login" element={<Login />} />
+          <Route path="/*" element={<Login />} />
           <Route path="/Lecturas" element={<Lecturas />} />
           <Route path="/RFID" element={<RFID />} />
           <Route path="/GenerarReporte" element={<GenerarReporte />} />
           <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
+          <Route path="/Reset" element={<Reset />} />
         </Routes>
       </Contenedor>
     </Router>

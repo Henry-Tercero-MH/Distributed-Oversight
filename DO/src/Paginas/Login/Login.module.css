@@ -5,6 +5,7 @@
   text-align: center;
   align-content: center;
   align-items: center;
+  box-shadow: var(--box-shadow);
 }
 
 .formulario ::placeholder {
@@ -34,7 +35,7 @@
 /* Estilos de la caja de información */
 .cajaInfo {
   height: 50px;
-  width: 320px; /* Asegura que ocupe el ancho completo */
+  width: 325px; /* Asegura que ocupe el ancho completo */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,6 +50,9 @@ input {
   border: none;
   width: 335px;
   color: white;
+}
+form {
+  box-shadow: var(--box-shadow);
 }
 
 input {
@@ -74,11 +78,12 @@ form button:hover {
   height: 25px;
 }
 .formulario {
-  width: 325px;
+  width: 360px;
   border-radius: 10px 10px;
   background-color: var(--colorOver);
   padding: 10px 10px;
   text-align: center;
+  font-size: 20px;
 }
 .cajaInfo input {
   width: 25px;

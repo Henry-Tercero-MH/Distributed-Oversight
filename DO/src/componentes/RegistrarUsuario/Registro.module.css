@@ -75,14 +75,26 @@
     width: 705px;
     height: 742px;
     margin-top: 150px;
-    background-color: rgb(20, 45, 70, 0.69);
+  }
+
+  .grupoEntrada {
+    height: 80px;
+    text-transform: uppercase;
+  }
+  .grupoEntrada label {
+    font-size: 16px;
+  }
+  .contenedorLogo img {
+    width: 150px;
+    height: 150px;
   }
   .cajaEntrada {
-  }
-  .grupoEntrada {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+  }
+  .botonEnviar {
+    width: 400px;
+    margin: 5px 5px;
   }
 }
 

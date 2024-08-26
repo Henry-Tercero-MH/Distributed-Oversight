@@ -1,0 +1,41 @@
+.cajaGenerarReporte {
+  width: 100%;
+  display: block;
+  justify-content: center;
+}
+.cajaFormularioGenerarReporte {
+  display: inline-block;
+  width: 360px;
+  height: auto;
+  text-transform: uppercase;
+  border-radius: 15px 15px;
+  font-size: 30px;
+  text-align: center;
+  padding: 15px 15px;
+  gap: 50px;
+  align-items: center;
+  align-content: center;
+  overflow: hidden;
+  margin-top: 100px;
+  margin-bottom: 500px;
+  background-color: var(--colorOver);
+}
+
+.cajaFormularioGenerarReporte label {
+  height: 80px;
+  background-color: rgb(5, 38, 67);
+  font-size: 28px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+.titulo label {
+  font-size: 36px;
+  width: 100%;
+}
+.cajaIngresodatos {
+  gap: 10px;
+}
+.cajaIngresodatos input {
+  background-color: rgba(0, 255, 255, 0.509);
+}
