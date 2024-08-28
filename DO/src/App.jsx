@@ -8,22 +8,25 @@ import Header from "./componentes/Header/Header";
 import Contenedor from "./componentes/Contenedor/Contenedor";
 import RegistroUsuario from "./componentes/RegistrarUsuario/Registro";
 import Reset from "./componentes/RestablecerContraseña/ResetPassword";
+import { GlobalProvider } from "./context/GlobalContext";
 
 const App = () => {
   return (
-    <Router>
-      <Contenedor>
-        <Header />
-        <Routes>
-          <Route path="/*" element={<Login />} />
-          <Route path="/Lecturas" element={<Lecturas />} />
-          <Route path="/RFID" element={<RFID />} />
-          <Route path="/GenerarReporte" element={<GenerarReporte />} />
-          <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
-          <Route path="/Reset" element={<Reset />} />
-        </Routes>
-      </Contenedor>
-    </Router>
+    <GlobalProvider>
+      <Router>
+        <Contenedor>
+          <Header />
+          <Routes>
+            <Route path="/*" element={<Login />} />
+            <Route path="/Lecturas" element={<Lecturas />} />
+            <Route path="/RFID" element={<RFID />} />
+            <Route path="/GenerarReporte" element={<GenerarReporte />} />
+            <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
+            <Route path="/Reset" element={<Reset />} />
+          </Routes>
+        </Contenedor>
+      </Router>
+    </GlobalProvider>
   );
 };
 

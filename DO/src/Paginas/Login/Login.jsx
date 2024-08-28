@@ -5,15 +5,16 @@ import styles from "./Login.module.css";
 import logoLogin from "./Vector.png";
 import iconUser from "./bx-user.svg.png";
 import iconPassword from "./bxs-lock.svg.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../services/api"; // Asegúrate de que esta importación sea correcta
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
 
-  // useEffect para validar el formulario en tiempo real
   useEffect(() => {
     if (username !== "" && password !== "") {
       setIsFormValid(true);
@@ -22,20 +23,27 @@ const Login = () => {
       setIsFormValid(false);
       setError("Por favor, completa todos los campos.");
     }
-  }, [username, password]); // Se ejecuta cada vez que username o password cambian
+  }, [username, password]);
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     if (!isFormValid) {
       return;
     }
 
-    // Aquí iría la lógica para autenticar al usuario (ej. llamada a una API)
-    console.log("Username:", username);
-    console.log("Password:", password);
+    try {
+      const data = await loginUser(username, password);
 
-    // Limpiar los campos si el login es exitoso
+      if (data.success) {
+        navigate("/RFID");
+      } else {
+        setError(data.message || "Credenciales incorrectas");
+      }
+    } catch (err) {
+      setError(err.message || "Error al autenticar el usuario");
+    }
+
     setUsername("");
     setPassword("");
   };
@@ -80,11 +88,9 @@ const Login = () => {
             </div>
           </Link>
         </div>
-
         <button type="submit" className={styles.boton} disabled={!isFormValid}>
           LOGIN
         </button>
-
         <Link to="/RegistroUsuario">
           <div className={styles.items}>
             <p>¿No tiene una cuenta?</p>

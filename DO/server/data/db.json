@@ -1,0 +1,218 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "Pérez",
+      "email": "juan.perez@example.com",
+      "puesto": "Conductor",
+      "contraseña": "123456",
+      "nip": "1234",
+      "cui": "1234567890123"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "dev",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12345",
+      "cui": "123456789"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@cgt",
+      "puesto": "des",
+      "contraseña": "1234",
+      "confirmacionContraseña": "1234",
+      "nip": "1234",
+      "cui": "123453"
+    },
+    {
+      "nombre": "julio",
+      "apellido": "jdj",
+      "email": "julio@gmail.com",
+      "puesto": "desarr",
+      "contraseña": "1234",
+      "confirmacionContraseña": "1234",
+      "nip": "12345",
+      "cui": "123453222"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gteee",
+      "puesto": "pruebas",
+      "contraseña": "1234",
+      "confirmacionContraseña": "1234",
+      "nip": "2322",
+      "cui": "54352344"
+    },
+    {
+      "nombre": "lucas mendoza",
+      "apellido": "mwos",
+      "email": "hterceroh@miumg.edu.gtdedwerf",
+      "puesto": "pruebas",
+      "contraseña": "3232",
+      "confirmacionContraseña": "3232",
+      "nip": "12345",
+      "cui": "323234323"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "wdsdsd",
+      "contraseña": "12345",
+      "confirmacionContraseña": "12345",
+      "nip": "12343",
+      "cui": "3423423432"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "fndjnwej",
+      "contraseña": "Passw0rd..",
+      "confirmacionContraseña": "Passw0rd..",
+      "nip": "12323",
+      "cui": "223"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "dev",
+      "contraseña": "Passw0rd...",
+      "confirmacionContraseña": "Passw0rd...",
+      "nip": "23332",
+      "cui": "2334234"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "dev",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1234",
+      "cui": "123456"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "dev",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "231212",
+      "cui": "2121"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "dwe",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1223",
+      "cui": "121215"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "pruebas",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "123131",
+      "cui": "123123213"
+    },
+    {
+      "nombre": "dnfjd",
+      "apellido": "wfkdj",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "dkkdk",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1234",
+      "cui": "2121"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miwumg.edu.gt",
+      "puesto": "dev",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1234",
+      "cui": "1221222"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "htercerosh@miumg.edu.gt",
+      "puesto": "dev",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12222",
+      "cui": "2323"
+    },
+    {
+      "nombre": "qwfqwf",
+      "apellido": "Hernández",
+      "email": "hterceroh@miumg.ddddedu.gt",
+      "puesto": "dsfgh",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "122121",
+      "cui": "12313213"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceqewwroh@miumg.edu.gt",
+      "puesto": "qewrf",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1221221",
+      "cui": "2131231"
+    }
+  ],
+  "lecturas": [
+    {
+      "id": 1,
+      "fechaHora": "2024-08-27T14:00:00Z",
+      "conductor": "Juan Pérez",
+      "placa": "P-154MKD"
+    }
+  ],
+  "rfid": [
+    {
+      "id": 1,
+      "vehiculo": {
+        "uso": "Transporte",
+        "tipo": "Camioneta",
+        "linea": "Hilux",
+        "chasis": "ABC123456",
+        "serie": "XYZ987654",
+        "asientos": 4,
+        "color": "Rojo",
+        "placa": "P-154MKD",
+        "modelo": "2023"
+      },
+      "conductor": {
+        "nombre": "Juan Pérez",
+        "cui": "1234567890123",
+        "nit": "987654321"
+      },
+      "reporte": {
+        "ubicacion": "14.634915,-90.506882",
+        "fecha": "2024-08-27",
+        "hora": "14:00"
+      }
+    }
+  ]
+}
