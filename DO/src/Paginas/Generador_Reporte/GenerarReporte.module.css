@@ -23,11 +23,12 @@
 
 .cajaFormularioGenerarReporte label {
   height: 80px;
-  background-color: rgb(5, 38, 67);
+  background-color: var(--colorFondo);
   font-size: 28px;
   text-align: center;
   align-items: center;
   align-content: center;
+  box-shadow: var(--box-shadowInput);
 }
 .titulo label {
   font-size: 36px;
@@ -36,6 +37,23 @@
 .cajaIngresodatos {
   gap: 10px;
 }
-.cajaIngresodatos input {
-  background-color: rgba(0, 255, 255, 0.509);
+.cajaIngresodatos input,
+select {
+  background-color: var(--colorFondoTexto);
+  height: 80px;
+  margin-bottom: 5px;
+  box-shadow: var(--box-shadowInput);
+}
+
+input {
+  height: 80px;
+}
+.cajaIngresodatos ::placeholder {
+  font-size: 28px;
+  color: gray;
+  text-align: center;
+}
+
+.listaOpciones {
+  height: 80px;
 }

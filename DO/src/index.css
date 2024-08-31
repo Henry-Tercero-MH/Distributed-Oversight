@@ -5,11 +5,13 @@
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  --colorOver: rgba(7, 8, 8, 0.8);
+  --colorOver: rgba(7, 8, 8, 0.9);
   --coloHeader: rgb(12, 252, 12);
   --colorOverMenu: rgba(7, 8, 8, 1);
   --colorFondoTexto: rgb(217, 217, 217, 0.2);
+  --colorFondo: rgba(28, 1, 72, 0.988);
   --box-shadow: 0 4px 8px 0 rgb(254, 254, 254);
+  --box-shadowInput: 0 4px 8px 0 rgb(4, 1, 28);
   background-image: url(../public/6a8ba4bc-36bc-4a8b-9dc6-62be3fa1c72d.jpg);
   background-position: center; /* Centra la imagen en el contenedor */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
