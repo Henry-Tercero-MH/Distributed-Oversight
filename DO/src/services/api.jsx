@@ -36,9 +36,17 @@ export const checkEmailExists = async (email) => {
   }
 };
 
-// Función para registrar un nuevo usuario
+// Función para registrar un nuevo usuario, con verificación de correo
 export const registerUser = async (userData) => {
   try {
+    // Verificar si el correo ya existe
+    const emailExists = await checkEmailExists(userData.email);
+
+    if (emailExists) {
+      return { success: false, message: "El correo ya está registrado." };
+    }
+
+    // Si el correo no existe, proceder con el registro
     const response = await fetch(`${API_URL}/usuarios`, {
       method: "POST",
       headers: {
@@ -46,11 +54,34 @@ export const registerUser = async (userData) => {
       },
       body: JSON.stringify(userData),
     });
+
     if (!response.ok) {
       throw new Error("Error al registrar el usuario");
     }
+
     const data = await response.json();
     return { success: true, user: data }; // Retornamos el usuario registrado
+  } catch (error) {
+    throw new Error(error.message || "Error de red");
+  }
+};
+// Función para solicitar el restablecimiento de contraseña
+export const requestPasswordReset = async (email) => {
+  try {
+    const response = await fetch(`${API_URL}/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al solicitar el restablecimiento de contraseña");
+    }
+
+    const data = await response.json();
+    return data; // Aquí asumimos que el backend devuelve un objeto con un mensaje
   } catch (error) {
     throw new Error(error.message || "Error de red");
   }

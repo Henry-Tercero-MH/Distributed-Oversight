@@ -229,6 +229,16 @@
       "confirmacionContraseña": "Passw0rd.",
       "nip": "1232",
       "cui": "121234"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hh@miumg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "23233",
+      "cui": "1321"
     }
   ],
   "lecturas": [

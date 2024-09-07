@@ -2,7 +2,6 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
-
 const app = express();
 const port = 3001;
 
@@ -161,9 +160,6 @@ app.post("/api/rfid", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
 // Ruta para verificar si un correo electrónico ya existe en la base de datos
 app.get("/api/check-email", (req, res) => {
   const { email } = req.query;
@@ -187,4 +183,8 @@ app.get("/api/check-email", (req, res) => {
       res.status(500).json({ error: "Error al procesar la base de datos" });
     }
   });
+});
+
+app.listen(port, () => {
+  console.log(`Servidor corriendo en http://localhost:${port}`);
 });
