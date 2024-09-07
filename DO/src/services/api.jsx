@@ -31,6 +31,7 @@ export const checkEmailExists = async (email) => {
     const data = await response.json();
     return data.exists; // Suponiendo que el backend responde con { exists: true/false }
   } catch (error) {
+    console.log(error);
     throw new Error("Error al verificar el correo electrónico.");
   }
 };
@@ -38,7 +39,7 @@ export const checkEmailExists = async (email) => {
 // Función para registrar un nuevo usuario
 export const registerUser = async (userData) => {
   try {
-    const response = await fetch(`${API_URL}/register`, {
+    const response = await fetch(`${API_URL}/usuarios`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

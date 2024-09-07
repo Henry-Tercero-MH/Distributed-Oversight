@@ -46,22 +46,23 @@ form,
 input {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   border: none;
   width: 335px;
   color: white;
+  height: auto;
 }
 .cajaTexto {
-  height: 60px;
+  height: 70px;
 }
 form {
   box-shadow: var(--box-shadow);
 }
 
 input {
-  padding: 10px;
   border-radius: 5px;
   border: none;
+  text-align: left;
 }
 
 form button {
@@ -87,6 +88,14 @@ form button:hover {
   padding: 10px 10px;
   text-align: center;
   font-size: 20px;
+  height: auto;
+  display: inline-height;
+}
+.formulario label {
+  width: 60px;
+}
+.formulario input {
+  font-size: 24px;
 }
 .cajaInfo input {
   width: 25px;

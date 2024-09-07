@@ -179,6 +179,56 @@
       "confirmacionContraseña": "Passw0rd.",
       "nip": "1221221",
       "cui": "2131231"
+    },
+    {
+      "nombre": "los",
+      "apellido": "les",
+      "email": "l.los@gmial.com",
+      "puesto": "dev",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "232",
+      "cui": "232"
+    },
+    {
+      "nombre": "jose",
+      "apellido": "estupe",
+      "email": "jestupe@gmail.com",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1232",
+      "cui": "1233432"
+    },
+    {
+      "nombre": "juan",
+      "apellido": "estupe",
+      "email": "jestupe@gmail.com",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1234",
+      "cui": "12345"
+    },
+    {
+      "nombre": "dora",
+      "apellido": "cuy",
+      "email": "dcuy@gmail.com",
+      "puesto": "Subcomisario",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1234",
+      "cui": "123453"
+    },
+    {
+      "nombre": "wergh",
+      "apellido": "dfgh",
+      "email": "dcuy@gmail.com",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1232",
+      "cui": "121234"
     }
   ],
   "lecturas": [

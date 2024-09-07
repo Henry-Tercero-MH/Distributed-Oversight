@@ -1,22 +1,20 @@
 import React from "react";
-import styles from "./ListaOpciones.module.css";
+import styles from "./ListaOpciones.module.css"; // Estilos específicos del select
 
-const ListaOpciones = ({ valor, setEquipo, placeholder }) => {
-  const Equipos = ["Reporte de Robo", "Solvente", "Insolvente"];
-
-  const manejarCambio = (e) => {
-    setEquipo(e.target.value);
-  };
-
+const SelectList = ({ id, value, onChange, options, placeholder }) => {
   return (
-    <div className={styles.lista}>
-      <select value={valor} onChange={manejarCambio}>
-        <option value="" disabled hidden>
-          {placeholder}
-        </option>
-        {Equipos.map((equipo, index) => (
-          <option key={index} value={equipo}>
-            {equipo}
+    <div className={styles.grupoEntrada}>
+      <label htmlFor={id} className={styles.label}></label>
+      <select
+        id={id}
+        value={value}
+        onChange={onChange}
+        className={styles.select}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
           </option>
         ))}
       </select>
@@ -24,4 +22,4 @@ const ListaOpciones = ({ valor, setEquipo, placeholder }) => {
   );
 };
 
-export default ListaOpciones;
+export default SelectList;

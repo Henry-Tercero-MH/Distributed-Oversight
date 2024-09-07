@@ -56,7 +56,7 @@ const Login = () => {
         </h1>
         <div className={styles.cajaTexto}>
           <Label htmlFor="username">
-            <img src={iconUser} alt="" width="35" height="35" />
+            <img src={iconUser} alt="" width="50" height="50" />
           </Label>
           <Input
             type="email"
@@ -68,7 +68,7 @@ const Login = () => {
         </div>
         <div className={styles.cajaTexto}>
           <Label htmlFor="password">
-            <img src={iconPassword} alt="" width="35" height="35" />
+            <img src={iconPassword} alt="" width="50" height="50" />
           </Label>
           <Input
             type="password"

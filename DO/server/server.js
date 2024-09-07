@@ -164,3 +164,27 @@ app.post("/api/rfid", (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+// Ruta para verificar si un correo electrónico ya existe en la base de datos
+app.get("/api/check-email", (req, res) => {
+  const { email } = req.query;
+
+  // Leer el archivo db.json
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error al leer la base de datos:", err);
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+    try {
+      const db = JSON.parse(data);
+
+      // Verificar si el correo existe en la base de datos
+      const emailExists = db.usuarios.some((user) => user.email === email);
+
+      // Responder con el resultado
+      res.json({ exists: emailExists });
+    } catch (parseError) {
+      console.error("Error al parsear el archivo JSON:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
+    }
+  });
+});

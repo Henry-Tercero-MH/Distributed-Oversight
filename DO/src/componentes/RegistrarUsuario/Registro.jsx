@@ -5,6 +5,7 @@ import styles from "./Registro.module.css";
 import logoLogin from "./Vector.png";
 import { registerUser, checkEmailExists } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import SelectList from "../Lista_Opciones/ListaOpciones";
 
 const RegistroUsuario = () => {
   const [formData, setFormData] = useState({
@@ -95,6 +96,7 @@ const RegistroUsuario = () => {
           setEmailError("");
         }
       } catch (err) {
+        console.log(err);
         setError("Error al verificar el correo electrónico.");
       }
     }
@@ -123,6 +125,7 @@ const RegistroUsuario = () => {
   return (
     <section className={styles.contenedorFormulario}>
       <form onSubmit={handleSubmit} className={styles.formularioRegistro}>
+        <h1 className={styles.titulo}>Registro</h1>
         <h1 className={styles.contenedorLogo}>
           <img src={logoLogin} className={styles.imagenLogo} alt="logoLogin" />
         </h1>
@@ -161,11 +164,17 @@ const RegistroUsuario = () => {
           </div>
           <div className={styles.grupoEntrada}>
             <Label htmlFor="puesto">Puesto</Label>
-            <Input
-              type="text"
+            <SelectList
               id="puesto"
+              label="Puesto"
               value={formData.puesto}
               onChange={handleInputChange}
+              options={[
+                "Civil",
+                "Comisario",
+                "Subcomisario",
+                "Analista de Datos",
+              ]}
               placeholder="Seleccione su puesto"
             />
           </div>
