@@ -11,7 +11,10 @@ const SelectList = ({ id, value, onChange, options, placeholder }) => {
         onChange={onChange}
         className={styles.select}
       >
-        <option value="">{placeholder}</option>
+        <option value="" disabled>
+          {placeholder}
+        </option>{" "}
+        {/* Hacer el placeholder no seleccionable */}
         {options.map((option, index) => (
           <option key={index} value={option}>
             {option}

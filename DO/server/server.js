@@ -164,7 +164,6 @@ app.post("/api/rfid", (req, res) => {
 app.get("/api/check-email", (req, res) => {
   const { email } = req.query;
 
-  // Leer el archivo db.json
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) {
       console.error("Error al leer la base de datos:", err);
@@ -178,6 +177,37 @@ app.get("/api/check-email", (req, res) => {
 
       // Responder con el resultado
       res.json({ exists: emailExists });
+    } catch (parseError) {
+      console.error("Error al parsear el archivo JSON:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
+    }
+  });
+});
+// Ruta para agregar un nuevo reporte
+app.post("/api/reportes", (req, res) => {
+  const newReport = req.body;
+
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error al leer la base de datos:", err);
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+
+    try {
+      const db = JSON.parse(data);
+      // Asegúrate de que la clave 'reportes' exista en db.json
+      if (!db.reportes) {
+        db.reportes = [];
+      }
+      db.reportes.push(newReport);
+
+      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
+        if (err) {
+          console.error("Error al guardar el reporte:", err);
+          return res.status(500).json({ error: "Error al guardar el reporte" });
+        }
+        res.status(201).json(newReport);
+      });
     } catch (parseError) {
       console.error("Error al parsear el archivo JSON:", parseError);
       res.status(500).json({ error: "Error al procesar la base de datos" });

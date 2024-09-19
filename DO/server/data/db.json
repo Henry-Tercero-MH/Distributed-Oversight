@@ -239,6 +239,16 @@
       "confirmacionContraseña": "Passw0rd.",
       "nip": "23233",
       "cui": "1321"
+    },
+    {
+      "nombre": "klassj",
+      "apellido": "sddsj",
+      "email": "ss@gmail.com",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1232",
+      "cui": "13e121"
     }
   ],
   "lecturas": [
@@ -274,5 +284,6 @@
         "hora": "14:00"
       }
     }
-  ]
+  ],
+  "reportes": [{}]
 }

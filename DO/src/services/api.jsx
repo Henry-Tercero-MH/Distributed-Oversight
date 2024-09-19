@@ -28,6 +28,9 @@ export const checkEmailExists = async (email) => {
     const response = await fetch(
       `${API_URL}/check-email?email=${encodeURIComponent(email)}`
     );
+    if (!response.ok) {
+      throw new Error("Error al verificar el correo electrónico.");
+    }
     const data = await response.json();
     return data.exists; // Suponiendo que el backend responde con { exists: true/false }
   } catch (error) {
@@ -65,6 +68,7 @@ export const registerUser = async (userData) => {
     throw new Error(error.message || "Error de red");
   }
 };
+
 // Función para solicitar el restablecimiento de contraseña
 export const requestPasswordReset = async (email) => {
   try {
@@ -82,6 +86,81 @@ export const requestPasswordReset = async (email) => {
 
     const data = await response.json();
     return data; // Aquí asumimos que el backend devuelve un objeto con un mensaje
+  } catch (error) {
+    throw new Error(error.message || "Error de red");
+  }
+};
+
+// Función para cambiar la contraseña
+export const changePassword = async (token, newPassword) => {
+  try {
+    const response = await fetch(`${API_URL}/change-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token, newPassword }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al cambiar la contraseña");
+    }
+
+    const data = await response.json();
+    return data; // Retornamos el resultado del cambio de contraseña
+  } catch (error) {
+    throw new Error(error.message || "Error de red");
+  }
+};
+
+// Función para obtener los datos de un usuario autenticado (por ejemplo, para perfil)
+export const getUserProfile = async (userId) => {
+  try {
+    const response = await fetch(`${API_URL}/usuarios/${userId}`);
+    if (!response.ok) {
+      throw new Error("Error al obtener el perfil del usuario");
+    }
+    const data = await response.json();
+    return data; // Retornamos los datos del perfil
+  } catch (error) {
+    throw new Error(error.message || "Error de red");
+  }
+};
+
+// Función para actualizar el perfil del usuario
+export const updateUserProfile = async (userId, profileData) => {
+  try {
+    const response = await fetch(`${API_URL}/usuarios/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al actualizar el perfil del usuario");
+    }
+
+    const data = await response.json();
+    return { success: true, user: data }; // Retornamos el perfil actualizado
+  } catch (error) {
+    throw new Error(error.message || "Error de red");
+  }
+};
+
+// Función para eliminar un usuario
+export const deleteUser = async (userId) => {
+  try {
+    const response = await fetch(`${API_URL}/usuarios/${userId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al eliminar el usuario");
+    }
+
+    return { success: true, message: "Usuario eliminado con éxito" };
   } catch (error) {
     throw new Error(error.message || "Error de red");
   }
