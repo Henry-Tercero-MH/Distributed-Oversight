@@ -1,141 +1,109 @@
-// routes/apiRoutes.js
 const express = require("express");
+const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const router = express.Router();
 
-// Ruta para autenticar al usuario
-router.post("/login", (req, res) => {
-  const { username, password } = req.body;
+const dbPath = path.join(__dirname, "../data/db.json");
 
-  const filePath = path.join(__dirname, "../db.json");
+// Leer el archivo `db.json`
+function readDb() {
+  return JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+}
 
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Error al leer los datos" });
-    }
+// Escribir en el archivo `db.json`
+function writeDb(data) {
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+}
 
-    const db = JSON.parse(data);
-    const user = db.users.find(
-      (u) => u.username === username && u.password === password
-    );
+// Rutas para usuarios
 
-    if (user) {
-      res.json({ success: true });
-    } else {
-      res
-        .status(401)
-        .json({ success: false, message: "Credenciales incorrectas" });
-    }
-  });
+// Obtener todos los usuarios
+router.get("/usuarios", (req, res) => {
+  const db = readDb();
+  res.json(db.usuarios);
 });
 
-// Ruta para registrar un nuevo usuario
-router.post("/users", (req, res) => {
-  const newUser = req.body;
-
-  const filePath = path.join(__dirname, "../db.json");
-
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Error al leer los datos" });
-    }
-
-    const db = JSON.parse(data);
-    db.users.push(newUser);
-
-    fs.writeFile(filePath, JSON.stringify(db, null, 2), "utf8", (err) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ success: false, message: "Error al guardar los datos" });
-      }
-      res.json({ success: true });
-    });
-  });
+// Obtener usuario por ID
+router.get("/usuarios/:id", (req, res) => {
+  const db = readDb();
+  const usuario = db.usuarios.find((u) => u.id === parseInt(req.params.id));
+  if (usuario) {
+    res.json(usuario);
+  } else {
+    res.status(404).json({ message: "Usuario no encontrado" });
+  }
 });
 
-// Rutas para lecturas RFID y reportes (deberás implementar estas según sea necesario)
-router.post("/readings", (req, res) => {
-  const newReading = req.body;
-
-  const filePath = path.join(__dirname, "../db.json");
-
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Error al leer los datos" });
-    }
-
-    const db = JSON.parse(data);
-    db.readings.push(newReading);
-
-    fs.writeFile(filePath, JSON.stringify(db, null, 2), "utf8", (err) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ success: false, message: "Error al guardar los datos" });
-      }
-      res.json({ success: true });
-    });
-  });
+// Crear nuevo usuario
+router.post("/usuarios", (req, res) => {
+  const db = readDb();
+  const nuevoUsuario = req.body;
+  nuevoUsuario.id = db.usuarios.length + 1;
+  db.usuarios.push(nuevoUsuario);
+  writeDb(db);
+  res.status(201).json(nuevoUsuario);
 });
 
-router.post("/rfid", (req, res) => {
-  const newRfid = req.body;
-
-  const filePath = path.join(__dirname, "../db.json");
-
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Error al leer los datos" });
-    }
-
-    const db = JSON.parse(data);
-    db.rfid.push(newRfid);
-
-    fs.writeFile(filePath, JSON.stringify(db, null, 2), "utf8", (err) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ success: false, message: "Error al guardar los datos" });
-      }
-      res.json({ success: true });
-    });
-  });
+// Editar usuario existente
+router.put("/usuarios/:id", (req, res) => {
+  const db = readDb();
+  const index = db.usuarios.findIndex((u) => u.id === parseInt(req.params.id));
+  if (index !== -1) {
+    db.usuarios[index] = { ...db.usuarios[index], ...req.body };
+    writeDb(db);
+    res.json(db.usuarios[index]);
+  } else {
+    res.status(404).json({ message: "Usuario no encontrado" });
+  }
 });
 
-router.post("/reports", (req, res) => {
-  const newReport = req.body;
+// Eliminar usuario
+router.delete("/usuarios/:id", (req, res) => {
+  const db = readDb();
+  const index = db.usuarios.findIndex((u) => u.id === parseInt(req.params.id));
+  if (index !== -1) {
+    const eliminado = db.usuarios.splice(index, 1);
+    writeDb(db);
+    res.json(eliminado);
+  } else {
+    res.status(404).json({ message: "Usuario no encontrado" });
+  }
+});
 
-  const filePath = path.join(__dirname, "../db.json");
+// Rutas para lecturas RFID
 
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Error al leer los datos" });
-    }
+// Obtener todas las lecturas RFID
+router.get("/lecturas", (req, res) => {
+  const db = readDb();
+  res.json(db.lecturas);
+});
 
-    const db = JSON.parse(data);
-    db.reports.push(newReport);
+// Crear nueva lectura RFID
+router.post("/lecturas", (req, res) => {
+  const db = readDb();
+  const nuevaLectura = req.body;
+  nuevaLectura.id = db.lecturas.length + 1;
+  db.lecturas.push(nuevaLectura);
+  writeDb(db);
+  res.status(201).json(nuevaLectura);
+});
 
-    fs.writeFile(filePath, JSON.stringify(db, null, 2), "utf8", (err) => {
-      if (err) {
-        return res
-          .status(500)
-          .json({ success: false, message: "Error al guardar los datos" });
-      }
-      res.json({ success: true });
-    });
-  });
+// Rutas para reportes
+
+// Obtener todos los reportes
+router.get("/reportes", (req, res) => {
+  const db = readDb();
+  res.json(db.reportes);
+});
+
+// Crear nuevo reporte
+router.post("/reportes", (req, res) => {
+  const db = readDb();
+  const nuevoReporte = req.body;
+  nuevoReporte.id = db.reportes.length + 1;
+  db.reportes.push(nuevoReporte);
+  writeDb(db);
+  res.status(201).json(nuevoReporte);
 });
 
 module.exports = router;

@@ -4,6 +4,8 @@ import Label from "../../componentes/Label/Label";
 import Input from "../../componentes/Input/Input";
 import SelectList from "../../componentes/Lista_Opciones/ListaOpciones";
 import poto from "./capturaFoto.jpeg";
+import { createReporte } from "../../services/api"; // Asegúrate de que esta importación sea correcta
+import { useNavigate } from "react-router-dom"; // Asegúrate de importar useNavigate
 
 const GenerarReporte = () => {
   const [estado, setEstado] = useState("");
@@ -14,18 +16,15 @@ const GenerarReporte = () => {
   const [photoTaken, setPhotoTaken] = useState(false);
   const [tempPhoto, setTempPhoto] = useState(null);
   const videoRef = useRef(null);
-  const captureAreaRef = useRef(null);
-  const modalRef = useRef(null);
-  let mediaStream = null; // Para almacenar el stream de video
+  const mediaStreamRef = useRef(null);
+  const navigate = useNavigate(); // Inicializa el hook useNavigate
 
-  // Efecto para manejar la cámara cuando se muestra el modal
   useEffect(() => {
     if (showModal && videoRef.current) {
-      // Iniciar la cámara cuando se muestra el modal
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
-          mediaStream = stream;
+          mediaStreamRef.current = stream;
           videoRef.current.srcObject = stream;
           console.log("Cámara iniciada.");
         })
@@ -33,42 +32,36 @@ const GenerarReporte = () => {
     }
 
     return () => {
-      // Apagar la cámara al cerrar el modal
-      if (mediaStream) {
-        mediaStream.getTracks().forEach((track) => track.stop());
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach((track) => track.stop());
         console.log("Cámara apagada.");
       }
     };
   }, [showModal]);
 
-  // Mostrar el modal y abrir la cámara
   const handleCapture = () => {
     console.log("Mostrar modal para captura de foto.");
     setShowModal(true);
   };
 
-  // Función para capturar la imagen desde el video usando ImageCapture
   const handlePhotoCapture = () => {
-    const track = mediaStream.getVideoTracks()[0]; // Obtener el track de video
-
+    const track = mediaStreamRef.current.getVideoTracks()[0];
     const imageCapture = new ImageCapture(track);
 
     imageCapture
       .takePhoto()
       .then((blob) => {
-        const photoURL = URL.createObjectURL(blob); // Crear URL temporal de la imagen
-        setTempPhoto(photoURL); // Guardar la URL de la imagen capturada
-        setPhotoTaken(true); // Indicar que la foto ha sido tomada
+        const photoURL = URL.createObjectURL(blob);
+        setTempPhoto(photoURL);
+        setPhotoTaken(true);
         console.log("Foto capturada exitosamente.");
 
-        // Apagar la cámara después de la captura
-        mediaStream.getTracks().forEach((track) => track.stop());
+        mediaStreamRef.current.getTracks().forEach((track) => track.stop());
         console.log("Cámara apagada.");
       })
       .catch((error) => console.error("Error al capturar la imagen:", error));
   };
 
-  // Intentar capturar la foto nuevamente
   const handleTryAgain = () => {
     console.log("Intentar capturar la foto nuevamente.");
     setPhotoTaken(false);
@@ -77,26 +70,24 @@ const GenerarReporte = () => {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
-          mediaStream = stream;
+          mediaStreamRef.current = stream;
           videoRef.current.srcObject = stream;
         })
         .catch((err) => console.error("Error al acceder a la cámara:", err));
     }
   };
 
-  // Eliminar la foto y cerrar el modal
   const handleDelete = () => {
     console.log("Eliminar foto y cerrar modal.");
     setTempPhoto(null);
     setPhotoTaken(false);
     setShowModal(false);
-    if (mediaStream) {
-      mediaStream.getTracks().forEach((track) => track.stop());
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach((track) => track.stop());
       console.log("Cámara apagada al cerrar el modal.");
     }
   };
 
-  // Enviar la foto capturada
   const handleSend = () => {
     if (!tempPhoto) {
       alert("No se ha capturado ninguna foto. Por favor, capture una foto.");
@@ -107,7 +98,6 @@ const GenerarReporte = () => {
     console.log("Foto lista para ser enviada.");
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -115,27 +105,24 @@ const GenerarReporte = () => {
       alert(
         "No se ha capturado una foto. Por favor, capture una antes de enviar."
       );
-      console.log("No se ha capturado una foto.");
       return;
     }
+
+    const response = await fetch(capturedPhoto);
+    const blob = await response.blob();
 
     const formData = new FormData();
     formData.append("placa", placa);
     formData.append("cui", cui);
     formData.append("estado", estado);
-    formData.append("photo", capturedPhoto);
+    formData.append("photo", blob, "captura.jpg");
 
     try {
-      const response = await fetch(`${API_URL}/reportes`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        console.log("Datos enviados exitosamente.");
-      } else {
-        console.error("Error al enviar los datos:", response.statusText);
-      }
+      const response = await createReporte(formData);
+      console.log("Reporte agregado:", response);
+      console.log("Datoa", formData);
+      alert("Reporte creado con éxito");
+      // Navegar a otra página o resetear el formulario
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
@@ -158,7 +145,6 @@ const GenerarReporte = () => {
             value={placa}
             onChange={(e) => setPlaca(e.target.value)}
           />
-
           <Label>Valide su CUI</Label>
           <Input
             type="text"
@@ -166,9 +152,8 @@ const GenerarReporte = () => {
             value={cui}
             onChange={(e) => setCui(e.target.value)}
           />
-
           <Label>Capture una foto</Label>
-          <div ref={captureAreaRef} style={{ position: "relative" }}>
+          <div style={{ position: "relative" }}>
             {!capturedPhoto ? (
               <img
                 src={poto}
@@ -192,7 +177,6 @@ const GenerarReporte = () => {
               Capturar
             </button>
           </div>
-
           <SelectList
             id="estado"
             value={estado}
@@ -206,7 +190,7 @@ const GenerarReporte = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className={styles.modal} ref={modalRef}>
+        <div className={styles.modal}>
           <div className={styles.modalContent}>
             {!photoTaken ? (
               <div>
