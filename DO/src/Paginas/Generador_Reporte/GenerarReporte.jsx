@@ -108,9 +108,11 @@ const GenerarReporte = () => {
       return;
     }
 
+    // Convertir la foto capturada a Blob
     const response = await fetch(capturedPhoto);
     const blob = await response.blob();
 
+    // Crear el FormData con los datos del formulario y la foto
     const formData = new FormData();
     formData.append("placa", placa);
     formData.append("cui", cui);
@@ -118,11 +120,10 @@ const GenerarReporte = () => {
     formData.append("photo", blob, "captura.jpg");
 
     try {
+      // Enviar los datos usando createReporte
       const response = await createReporte(formData);
       console.log("Reporte agregado:", response);
-      console.log("Datoa", formData);
       alert("Reporte creado con éxito");
-      // Navegar a otra página o resetear el formulario
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }

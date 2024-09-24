@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const multer = require("multer"); // Asegúrate de haber instalado multer
 const app = express();
 const port = 3001;
 
@@ -68,26 +69,30 @@ app.post("/api/usuarios", (req, res) => {
   });
 });
 
-// Ruta para obtener lecturas
-app.get("/api/lecturas", (req, res) => {
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error al leer la base de datos:", err);
-      return res.status(500).json({ error: "Error al leer la base de datos" });
+// Configurar multer para almacenar las imágenes en la carpeta 'uploads'
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadsDir = path.join(__dirname, "uploads");
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir);
     }
-    try {
-      const db = JSON.parse(data);
-      res.json(db.lecturas);
-    } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
-      res.status(500).json({ error: "Error al procesar la base de datos" });
-    }
-  });
+    cb(null, uploadsDir); // Asegúrate de que existe la carpeta 'uploads'
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
 
-// Ruta para agregar una nueva lectura
-app.post("/api/lecturas", (req, res) => {
-  const newReading = req.body;
+const upload = multer({ storage: storage });
+
+// Ruta para manejar la creación de reportes
+app.post("/api/reportes", upload.single("photo"), (req, res) => {
+  const { placa, cui, estado } = req.body;
+  const photo = req.file ? req.file.path : null;
+
+  if (!placa || !cui || !estado || !photo) {
+    return res.status(400).json({ error: "Faltan datos o foto" });
+  }
 
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) {
@@ -97,108 +102,19 @@ app.post("/api/lecturas", (req, res) => {
 
     try {
       const db = JSON.parse(data);
-      db.lecturas.push(newReading);
 
-      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
-        if (err) {
-          console.error("Error al guardar la lectura:", err);
-          return res.status(500).json({ error: "Error al guardar la lectura" });
-        }
-        res.status(201).json(newReading);
-      });
-    } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
-      res.status(500).json({ error: "Error al procesar la base de datos" });
-    }
-  });
-});
-
-// Ruta para obtener datos RFID
-app.get("/api/rfid", (req, res) => {
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error al leer la base de datos:", err);
-      return res.status(500).json({ error: "Error al leer la base de datos" });
-    }
-    try {
-      const db = JSON.parse(data);
-      res.json(db.rfid);
-    } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
-      res.status(500).json({ error: "Error al procesar la base de datos" });
-    }
-  });
-});
-
-// Ruta para agregar datos RFID
-app.post("/api/rfid", (req, res) => {
-  const newRfid = req.body;
-
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error al leer la base de datos:", err);
-      return res.status(500).json({ error: "Error al leer la base de datos" });
-    }
-
-    try {
-      const db = JSON.parse(data);
-      db.rfid.push(newRfid);
-
-      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
-        if (err) {
-          console.error("Error al guardar el dato RFID:", err);
-          return res
-            .status(500)
-            .json({ error: "Error al guardar el dato RFID" });
-        }
-        res.status(201).json(newRfid);
-      });
-    } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
-      res.status(500).json({ error: "Error al procesar la base de datos" });
-    }
-  });
-});
-
-// Ruta para verificar si un correo electrónico ya existe en la base de datos
-app.get("/api/check-email", (req, res) => {
-  const { email } = req.query;
-
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error al leer la base de datos:", err);
-      return res.status(500).json({ error: "Error al leer la base de datos" });
-    }
-    try {
-      const db = JSON.parse(data);
-
-      // Verificar si el correo existe en la base de datos
-      const emailExists = db.usuarios.some((user) => user.email === email);
-
-      // Responder con el resultado
-      res.json({ exists: emailExists });
-    } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
-      res.status(500).json({ error: "Error al procesar la base de datos" });
-    }
-  });
-});
-// Ruta para agregar un nuevo reporte
-app.post("/api/reportes", (req, res) => {
-  const newReport = req.body;
-
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      console.error("Error al leer la base de datos:", err);
-      return res.status(500).json({ error: "Error al leer la base de datos" });
-    }
-
-    try {
-      const db = JSON.parse(data);
-      // Asegúrate de que la clave 'reportes' exista en db.json
       if (!db.reportes) {
         db.reportes = [];
       }
+
+      const newReport = {
+        id: db.reportes.length + 1,
+        placa,
+        cui,
+        estado,
+        photo,
+      };
+
       db.reportes.push(newReport);
 
       fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {

@@ -286,6 +286,16 @@
     }
   ],
   "reportes": [
-    {}
+    {},
+    {},
+    {},
+    {},
+    {
+      "id": 5,
+      "placa": "df",
+      "cui": "xdfg",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727213264481-captura.jpg"
+    }
   ]
 }

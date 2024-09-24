@@ -168,25 +168,20 @@ export const deleteUser = async (userId) => {
 
 export const createReporte = async (data) => {
   try {
-    const response = await fetch("http://localhost:3001/api/reportes", {
+    const response = await fetch(`${API_URL}/reportes`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      // No se debe establecer Content-Type manualmente cuando se envía FormData
+      body: data,
     });
 
-    // Verificar si la respuesta fue exitosa
     if (!response.ok) {
       throw new Error(`Error al crear el reporte: ${response.statusText}`);
     }
 
-    // Si deseas trabajar con la respuesta en formato JSON
     const result = await response.json();
     return result;
   } catch (error) {
-    // Manejo de errores
     console.error("Error al enviar los datos:", error);
-    throw error; // Esto permite que el error sea capturado en el nivel superior
+    throw error;
   }
 };
