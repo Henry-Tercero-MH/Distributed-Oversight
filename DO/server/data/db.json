@@ -6,296 +6,151 @@
       "apellido": "Pérez",
       "email": "juan.perez@example.com",
       "puesto": "Conductor",
-      "contraseña": "123456",
+      "contraseña": "hashed_password_here",
       "nip": "1234",
       "cui": "1234567890123"
     },
     {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "dev",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "12345",
-      "cui": "123456789"
+      "id": 2,
+      "nombre": "Ana",
+      "apellido": "García",
+      "email": "ana.garcia@example.com",
+      "puesto": "Conductor",
+      "contraseña": "hashed_password_here",
+      "nip": "5678",
+      "cui": "1234567890124"
     },
     {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@cgt",
-      "puesto": "des",
-      "contraseña": "1234",
-      "confirmacionContraseña": "1234",
-      "nip": "1234",
-      "cui": "123453"
+      "id": 3,
+      "nombre": "Carlos",
+      "apellido": "López",
+      "email": "carlos.lopez@example.com",
+      "puesto": "Conductor",
+      "contraseña": "hashed_password_here",
+      "nip": "9101",
+      "cui": "1234567890125"
     },
     {
-      "nombre": "julio",
-      "apellido": "jdj",
-      "email": "julio@gmail.com",
-      "puesto": "desarr",
-      "contraseña": "1234",
-      "confirmacionContraseña": "1234",
-      "nip": "12345",
-      "cui": "123453222"
+      "id": 4,
+      "nombre": "María",
+      "apellido": "Fernández",
+      "email": "maria.fernandez@example.com",
+      "puesto": "Conductor",
+      "contraseña": "hashed_password_here",
+      "nip": "1122",
+      "cui": "1234567890126"
     },
     {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gteee",
-      "puesto": "pruebas",
-      "contraseña": "1234",
-      "confirmacionContraseña": "1234",
-      "nip": "2322",
-      "cui": "54352344"
-    },
-    {
-      "nombre": "lucas mendoza",
-      "apellido": "mwos",
-      "email": "hterceroh@miumg.edu.gtdedwerf",
-      "puesto": "pruebas",
-      "contraseña": "3232",
-      "confirmacionContraseña": "3232",
-      "nip": "12345",
-      "cui": "323234323"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "wdsdsd",
-      "contraseña": "12345",
-      "confirmacionContraseña": "12345",
-      "nip": "12343",
-      "cui": "3423423432"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "fndjnwej",
-      "contraseña": "Passw0rd..",
-      "confirmacionContraseña": "Passw0rd..",
-      "nip": "12323",
-      "cui": "223"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "dev",
-      "contraseña": "Passw0rd...",
-      "confirmacionContraseña": "Passw0rd...",
-      "nip": "23332",
-      "cui": "2334234"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "dev",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1234",
-      "cui": "123456"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "dev",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "231212",
-      "cui": "2121"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "dwe",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1223",
-      "cui": "121215"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "pruebas",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "123131",
-      "cui": "123123213"
-    },
-    {
-      "nombre": "dnfjd",
-      "apellido": "wfkdj",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "dkkdk",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1234",
-      "cui": "2121"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceroh@miwumg.edu.gt",
-      "puesto": "dev",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1234",
-      "cui": "1221222"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "htercerosh@miumg.edu.gt",
-      "puesto": "dev",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "12222",
-      "cui": "2323"
-    },
-    {
-      "nombre": "qwfqwf",
-      "apellido": "Hernández",
-      "email": "hterceroh@miumg.ddddedu.gt",
-      "puesto": "dsfgh",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "122121",
-      "cui": "12313213"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hterceqewwroh@miumg.edu.gt",
-      "puesto": "qewrf",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1221221",
-      "cui": "2131231"
-    },
-    {
-      "nombre": "los",
-      "apellido": "les",
-      "email": "l.los@gmial.com",
-      "puesto": "dev",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "232",
-      "cui": "232"
-    },
-    {
-      "nombre": "jose",
-      "apellido": "estupe",
-      "email": "jestupe@gmail.com",
-      "puesto": "Civil",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1232",
-      "cui": "1233432"
-    },
-    {
-      "nombre": "juan",
-      "apellido": "estupe",
-      "email": "jestupe@gmail.com",
-      "puesto": "Civil",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1234",
-      "cui": "12345"
-    },
-    {
-      "nombre": "dora",
-      "apellido": "cuy",
-      "email": "dcuy@gmail.com",
-      "puesto": "Subcomisario",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1234",
-      "cui": "123453"
-    },
-    {
-      "nombre": "wergh",
-      "apellido": "dfgh",
-      "email": "dcuy@gmail.com",
-      "puesto": "Civil",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1232",
-      "cui": "121234"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "hh@miumg.edu.gt",
-      "puesto": "Civil",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "23233",
-      "cui": "1321"
-    },
-    {
-      "nombre": "klassj",
-      "apellido": "sddsj",
-      "email": "ss@gmail.com",
-      "puesto": "Civil",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "1232",
-      "cui": "13e121"
+      "id": 5,
+      "nombre": "Pedro",
+      "apellido": "Martínez",
+      "email": "pedro.martinez@example.com",
+      "puesto": "Conductor",
+      "contraseña": "hashed_password_here",
+      "nip": "3344",
+      "cui": "1234567890127"
     }
   ],
   "lecturas": [
     {
       "id": 1,
-      "fechaHora": "2024-08-27T14:00:00Z",
       "conductor": "Juan Pérez",
-      "placa": "P-154MKD"
+      "placa": "08356868",
+      "fechaHora": "2024-08-27T14:00:00Z",
+      "ubicacion": "14.634915,-90.506882"
     }
   ],
   "rfid": [
     {
       "id": 1,
-      "vehiculo": {
-        "uso": "Transporte",
-        "tipo": "Camioneta",
-        "linea": "Hilux",
-        "chasis": "ABC123456",
-        "serie": "XYZ987654",
-        "asientos": 4,
-        "color": "Rojo",
-        "placa": "P-154MKD",
-        "modelo": "2023"
-      },
-      "conductor": {
-        "nombre": "Juan Pérez",
-        "cui": "1234567890123",
-        "nit": "987654321"
-      },
-      "reporte": {
-        "ubicacion": "14.634915,-90.506882",
-        "fecha": "2024-08-27",
-        "hora": "14:00"
-      }
+      "uso": "Transporte",
+      "tipo": "Camioneta",
+      "linea": "Hilux",
+      "chasis": "ABC123456",
+      "serie": "XYZ987654",
+      "asientos": 4,
+      "color": "Rojo",
+      "placa": "08356868",
+      "modelo": "2023",
+      "nombre": "Juan Pérez",
+      "cui": "1234567890123",
+      "nit": "987654321"
+    },
+    {
+      "id": 2,
+      "uso": "Transporte",
+      "tipo": "Camioneta",
+      "linea": "Ranger",
+      "chasis": "DEF654321",
+      "serie": "LMN123456",
+      "asientos": 5,
+      "color": "Azul",
+      "placa": "08430791",
+      "modelo": "2022",
+      "nombre": "Ana García",
+      "cui": "1234567890124",
+      "nit": "654321987"
+    },
+    {
+      "id": 3,
+      "uso": "Transporte",
+      "tipo": "Sedán",
+      "linea": "Accord",
+      "chasis": "GHI789012",
+      "serie": "OPQ345678",
+      "asientos": 5,
+      "color": "Negro",
+      "placa": "08449914",
+      "modelo": "2021",
+      "nombre": "Carlos López",
+      "cui": "1234567890125",
+      "nit": "321654987"
+    },
+    {
+      "id": 4,
+      "uso": "Carga",
+      "tipo": "Camión",
+      "linea": "F-150",
+      "chasis": "JKL456789",
+      "serie": "RST654321",
+      "asientos": 2,
+      "color": "Verde",
+      "placa": "08406955",
+      "modelo": "2020",
+      "nombre": "Pedro Martínez",
+      "cui": "1234567890126",
+      "nit": "789456123"
+    },
+    {
+      "id": 5,
+      "uso": "Transporte",
+      "tipo": "SUV",
+      "linea": "Sportage",
+      "chasis": "MNO789012",
+      "serie": "ABC987654",
+      "asientos": 5,
+      "color": "Blanco",
+      "placa": "08018476",
+      "modelo": "2019",
+      "nombre": "María Fernández",
+      "cui": "1234567890127",
+      "nit": "456789123"
     }
   ],
   "reportes": [
-    {},
-    {},
-    {},
-    {},
     {
-      "id": 5,
-      "placa": "df",
-      "cui": "xdfg",
+      "id": 1,
+      "placa": "drftyh",
+      "cui": "swertg",
       "estado": "Solvente",
-      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727213264481-captura.jpg"
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727228124231-captura.jpg"
+    },
+    {
+      "id": 2,
+      "placa": "dfvdfb",
+      "cui": "sdfg",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727235674639-captura.jpg"
     }
   ]
 }

@@ -101,6 +101,11 @@ const GenerarReporte = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validar que todos los campos requeridos estén llenos
+    if (!placa || !cui || !estado || !capturedPhoto) {
+      alert("Por favor, complete todos los datos antes de generar el reporte.");
+      return;
+    }
     if (!capturedPhoto) {
       alert(
         "No se ha capturado una foto. Por favor, capture una antes de enviar."

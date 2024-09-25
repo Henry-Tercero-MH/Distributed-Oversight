@@ -131,6 +131,52 @@ app.post("/api/reportes", upload.single("photo"), (req, res) => {
   });
 });
 
+// Endpoint para agregar una nueva lectura
+app.post("/api/lecturas", (req, res) => {
+  const nuevaLectura = req.body;
+
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+
+    try {
+      const db = JSON.parse(data);
+      nuevaLectura.id = db.lecturas.length + 1; // Asignar un nuevo ID
+
+      db.lecturas.push(nuevaLectura); // Agregar la nueva lectura
+
+      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
+        if (err) {
+          return res.status(500).json({ error: "Error al guardar la lectura" });
+        }
+        res.status(201).json(nuevaLectura); // Responder con la nueva lectura
+      });
+    } catch (parseError) {
+      return res
+        .status(500)
+        .json({ error: "Error al procesar la base de datos" });
+    }
+  });
+});
+
+app.get("/api/lecturas/:placa", (req, res) => {
+  const placa = req.params.placa;
+
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+
+    const db = JSON.parse(data);
+    const lecturasFiltradas = db.lecturas.filter(
+      (lectura) => lectura.placa === placa
+    );
+
+    res.status(200).json(lecturasFiltradas);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });

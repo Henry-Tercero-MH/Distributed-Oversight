@@ -185,3 +185,29 @@ export const createReporte = async (data) => {
     throw error;
   }
 };
+// Función para obtener datos del vehículo específico por placa
+export const getRFIDByPlate = async (placa) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/rfid?placa=${encodeURIComponent(placa)}` // Asegúrate de que esta URL es correcta
+    );
+    console.log(
+      "URL a consultar:",
+      `${API_URL}/rfid?placa=${encodeURIComponent(placa)}`
+    );
+    console.log("placa a consultar desde el api", placa);
+    if (!response.ok) {
+      throw new Error("Error al obtener la información del vehículo");
+    }
+    const data = await response.json();
+
+    // Verificar si hay datos y retornar el primer elemento (si existe)
+    if (data && data.length > 0) {
+      return data[0]; // Retornar el primer vehículo que coincide con la placa
+    } else {
+      throw new Error("No se encontraron datos para esta placa");
+    }
+  } catch (error) {
+    throw new Error(error.message || "Error de red");
+  }
+};
