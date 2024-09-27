@@ -159,22 +159,27 @@ app.post("/api/lecturas", (req, res) => {
     }
   });
 });
+router.get("/rfid", (req, res) => {
+  const { placa } = req.query; // Obtener placa desde los parámetros de consulta
 
-app.get("/api/lecturas/:placa", (req, res) => {
-  const placa = req.params.placa;
+  // Validar que se haya proporcionado una placa
+  if (!placa) {
+    return res
+      .status(400)
+      .json({ message: "Se requiere el parámetro 'placa'." });
+  }
 
-  fs.readFile(dbPath, "utf8", (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: "Error al leer la base de datos" });
-    }
+  const db = readDb(); // Asegúrate de que esto esté funcionando correctamente
 
-    const db = JSON.parse(data);
-    const lecturasFiltradas = db.lecturas.filter(
-      (lectura) => lectura.placa === placa
-    );
+  // Buscar en la sección rfid
+  const vehiculo = db.rfid.find((v) => v.placa === placa); // Buscar por placa
 
-    res.status(200).json(lecturasFiltradas);
-  });
+  // Verificar si se encontró el vehículo
+  if (vehiculo) {
+    res.json(vehiculo); // Devolver el vehículo encontrado
+  } else {
+    res.status(404).json({ message: "Vehículo no encontrado." }); // Mensaje de error si no se encuentra
+  }
 });
 
 app.listen(port, () => {

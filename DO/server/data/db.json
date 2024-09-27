@@ -6,7 +6,7 @@
       "apellido": "Pérez",
       "email": "juan.perez@example.com",
       "puesto": "Conductor",
-      "contraseña": "hashed_password_here",
+      "contraseña": "123456",
       "nip": "1234",
       "cui": "1234567890123"
     },
@@ -104,7 +104,8 @@
       "modelo": "2021",
       "nombre": "Carlos López",
       "cui": "1234567890125",
-      "nit": "321654987"
+      "nit": "321654987",
+      "estado": "Solvente"
     },
     {
       "id": 4,

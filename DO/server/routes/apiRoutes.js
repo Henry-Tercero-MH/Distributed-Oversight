@@ -138,5 +138,28 @@ router.post("/reportes", (req, res) => {
   writeDb(db);
   res.status(201).json(nuevoReporte);
 });
+// Obtener vehículo por placa (con parámetros de consulta)
+router.get("/rfid", (req, res) => {
+  const { placa } = req.query; // Obtener placa desde los parámetros de consulta
+
+  // Validar que se haya proporcionado una placa
+  if (!placa) {
+    return res
+      .status(400)
+      .json({ message: "Se requiere el parámetro 'placa'." });
+  }
+
+  const db = readDb(); // Asumiendo que readDb() lee tu archivo JSON
+
+  // Buscar en la sección rfid
+  const vehiculo = db.rfid.find((v) => v.placa === placa); // Buscar por placa
+
+  // Verificar si se encontró el vehículo
+  if (vehiculo) {
+    res.json(vehiculo); // Devolver el vehículo encontrado
+  } else {
+    res.status(404).json({ message: "Vehículo no encontrado." }); // Mensaje de error si no se encuentra
+  }
+});
 
 module.exports = router;

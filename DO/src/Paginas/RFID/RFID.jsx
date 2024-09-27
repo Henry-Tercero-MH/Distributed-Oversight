@@ -22,10 +22,10 @@ const RFID = () => {
   const fetchVehicleData = async (tagID) => {
     try {
       const data = await getRFIDByPlate(tagID);
-      console.log("Datos recibidos del API:", data);
+      console.log("Datos recibidos del API:", data); // Asegúrate de que estás recibiendo datos válidos
       if (data) {
         setVehiculoData(data);
-        setConductorData(data.conductor || {});
+        setConductorData(data.conductor || {}); // Asegúrate de que 'conductor' sea una propiedad válida
         setErrorMessage("");
 
         // Captura la ubicación y la fecha/hora
@@ -35,7 +35,6 @@ const RFID = () => {
       }
     } catch (error) {
       console.error("Error al buscar el vehículo:", error);
-      // Agregando más contexto al mensaje de error
       setErrorMessage(
         `Error al acceder a los datos del vehículo: ${error.message}`
       );
