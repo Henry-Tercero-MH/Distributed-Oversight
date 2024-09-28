@@ -159,7 +159,9 @@ app.post("/api/lecturas", (req, res) => {
     }
   });
 });
-router.get("/rfid", (req, res) => {
+
+// Ruta para obtener datos de rfid
+app.get("/api/rfid", (req, res) => {
   const { placa } = req.query; // Obtener placa desde los parámetros de consulta
 
   // Validar que se haya proporcionado una placa
@@ -169,19 +171,32 @@ router.get("/rfid", (req, res) => {
       .json({ message: "Se requiere el parámetro 'placa'." });
   }
 
-  const db = readDb(); // Asegúrate de que esto esté funcionando correctamente
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error al leer la base de datos:", err);
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
 
-  // Buscar en la sección rfid
-  const vehiculo = db.rfid.find((v) => v.placa === placa); // Buscar por placa
+    try {
+      const db = JSON.parse(data);
 
-  // Verificar si se encontró el vehículo
-  if (vehiculo) {
-    res.json(vehiculo); // Devolver el vehículo encontrado
-  } else {
-    res.status(404).json({ message: "Vehículo no encontrado." }); // Mensaje de error si no se encuentra
-  }
+      // Buscar en la sección rfid
+      const vehiculo = db.rfid.find((v) => v.placa === placa); // Buscar por placa
+
+      // Verificar si se encontró el vehículo
+      if (vehiculo) {
+        res.json(vehiculo); // Devolver el vehículo encontrado
+      } else {
+        res.status(404).json({ message: "Vehículo no encontrado." }); // Mensaje de error si no se encuentra
+      }
+    } catch (parseError) {
+      console.error("Error al parsear el archivo JSON:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
+    }
+  });
 });
 
+// Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });

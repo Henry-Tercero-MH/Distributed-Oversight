@@ -20,7 +20,7 @@ function writeDb(data) {
 // Obtener todos los usuarios
 router.get("/usuarios", (req, res) => {
   const db = readDb();
-  res.json(db.usuarios);
+  res.json({ success: true, data: db.usuarios });
 });
 
 // Obtener usuario por ID
@@ -28,9 +28,9 @@ router.get("/usuarios/:id", (req, res) => {
   const db = readDb();
   const usuario = db.usuarios.find((u) => u.id === parseInt(req.params.id));
   if (usuario) {
-    res.json(usuario);
+    res.json({ success: true, data: usuario });
   } else {
-    res.status(404).json({ message: "Usuario no encontrado" });
+    res.status(404).json({ success: false, message: "Usuario no encontrado" });
   }
 });
 
@@ -41,7 +41,7 @@ router.post("/usuarios", (req, res) => {
   nuevoUsuario.id = db.usuarios.length + 1;
   db.usuarios.push(nuevoUsuario);
   writeDb(db);
-  res.status(201).json(nuevoUsuario);
+  res.status(201).json({ success: true, data: nuevoUsuario });
 });
 
 // Editar usuario existente
@@ -51,9 +51,9 @@ router.put("/usuarios/:id", (req, res) => {
   if (index !== -1) {
     db.usuarios[index] = { ...db.usuarios[index], ...req.body };
     writeDb(db);
-    res.json(db.usuarios[index]);
+    res.json({ success: true, data: db.usuarios[index] });
   } else {
-    res.status(404).json({ message: "Usuario no encontrado" });
+    res.status(404).json({ success: false, message: "Usuario no encontrado" });
   }
 });
 
@@ -64,9 +64,9 @@ router.delete("/usuarios/:id", (req, res) => {
   if (index !== -1) {
     const eliminado = db.usuarios.splice(index, 1);
     writeDb(db);
-    res.json(eliminado);
+    res.json({ success: true, data: eliminado });
   } else {
-    res.status(404).json({ message: "Usuario no encontrado" });
+    res.status(404).json({ success: false, message: "Usuario no encontrado" });
   }
 });
 
@@ -75,50 +75,78 @@ router.delete("/usuarios/:id", (req, res) => {
 // Obtener todas las lecturas RFID
 router.get("/lecturas", (req, res) => {
   const db = readDb();
-  res.json(db.lecturas);
+  res.json({ success: true, data: db.lecturas });
 });
 
 // Crear nueva lectura RFID y generar un reporte
 router.post("/lecturas", (req, res) => {
-  const db = readDb();
-  const nuevaLectura = req.body;
+  try {
+    const db = readDb();
+    const nuevaLectura = req.body;
 
-  // Buscar el vehículo según la placa en el archivo `db.json`
-  const vehiculo = db.vehiculos.find((v) => v.placa === nuevaLectura.placa);
+    // Validar que se proporcione la placa
+    if (
+      !nuevaLectura.placa ||
+      !nuevaLectura.ubicacion ||
+      !nuevaLectura.fecha ||
+      !nuevaLectura.hora
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Se requieren 'placa', 'ubicacion', 'fecha' y 'hora'.",
+      });
+    }
 
-  if (!vehiculo) {
-    return res.status(404).json({ message: "Vehículo no encontrado" });
+    // Buscar el vehículo según la placa en el archivo `db.json`
+    const vehiculo = db.vehiculos.find((v) => v.placa === nuevaLectura.placa);
+
+    if (!vehiculo) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Vehículo no encontrado." });
+    }
+
+    // Generar la nueva lectura RFID
+    nuevaLectura.id =
+      db.lecturas.length > 0
+        ? Math.max(...db.lecturas.map((l) => l.id)) + 1
+        : 1;
+    db.lecturas.push(nuevaLectura);
+
+    // Crear un nuevo reporte automáticamente con los nuevos datos
+    const nuevoReporte = {
+      id:
+        db.reportes.length > 0
+          ? Math.max(...db.reportes.map((r) => r.id)) + 1
+          : 1,
+      conductor: vehiculo.conductor || "Desconocido",
+      placa: vehiculo.placa,
+      tipo: vehiculo.tipo,
+      uso: vehiculo.uso,
+      ubicacion: nuevaLectura.ubicacion,
+      fecha: nuevaLectura.fecha,
+      hora: nuevaLectura.hora,
+      detalle: `Lectura RFID para el vehículo con placa ${vehiculo.placa} registrada en la ubicación ${nuevaLectura.ubicacion}.`,
+    };
+
+    // Agregar el nuevo reporte a la base de datos
+    db.reportes.push(nuevoReporte);
+
+    // Guardar los cambios en el archivo `db.json`
+    writeDb(db);
+
+    // Devolver la respuesta con la nueva lectura y el reporte generado
+    res.status(201).json({
+      success: true,
+      mensaje: "Lectura y reporte creados exitosamente.",
+      lectura: nuevaLectura,
+      reporte: nuevoReporte,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error al crear la lectura RFID." });
   }
-
-  // Generar la nueva lectura RFID
-  nuevaLectura.id = db.lecturas.length + 1;
-  db.lecturas.push(nuevaLectura);
-
-  // Crear un nuevo reporte automáticamente con los nuevos datos
-  const nuevoReporte = {
-    id: db.reportes.length + 1,
-    conductor: vehiculo.conductor || "Desconocido", // Asegúrate de que el campo exista
-    placa: vehiculo.placa,
-    tipo: vehiculo.tipo,
-    uso: vehiculo.uso,
-    ubicacion: nuevaLectura.ubicacion, // Nueva ubicación de la lectura
-    fecha: nuevaLectura.fecha, // Fecha de la lectura
-    hora: nuevaLectura.hora, // Hora de la lectura
-    detalle: `Lectura RFID para el vehículo con placa ${vehiculo.placa} registrada en la ubicación ${nuevaLectura.ubicacion}.`,
-  };
-
-  // Agregar el nuevo reporte a la base de datos
-  db.reportes.push(nuevoReporte);
-
-  // Guardar los cambios en el archivo `db.json`
-  writeDb(db);
-
-  // Devolver la respuesta con la nueva lectura y el reporte generado
-  res.status(201).json({
-    mensaje: "Lectura y reporte creados exitosamente",
-    lectura: nuevaLectura,
-    reporte: nuevoReporte,
-  });
 });
 
 // Rutas para reportes
@@ -126,7 +154,7 @@ router.post("/lecturas", (req, res) => {
 // Obtener todos los reportes
 router.get("/reportes", (req, res) => {
   const db = readDb();
-  res.json(db.reportes);
+  res.json({ success: true, data: db.reportes });
 });
 
 // Crear nuevo reporte
@@ -136,8 +164,9 @@ router.post("/reportes", (req, res) => {
   nuevoReporte.id = db.reportes.length + 1;
   db.reportes.push(nuevoReporte);
   writeDb(db);
-  res.status(201).json(nuevoReporte);
+  res.status(201).json({ success: true, data: nuevoReporte });
 });
+
 // Obtener vehículo por placa (con parámetros de consulta)
 router.get("/rfid", (req, res) => {
   const { placa } = req.query; // Obtener placa desde los parámetros de consulta
@@ -146,19 +175,27 @@ router.get("/rfid", (req, res) => {
   if (!placa) {
     return res
       .status(400)
-      .json({ message: "Se requiere el parámetro 'placa'." });
+      .json({ success: false, message: "Se requiere el parámetro 'placa'." });
   }
 
-  const db = readDb(); // Asumiendo que readDb() lee tu archivo JSON
+  try {
+    const db = readDb(); // Asumiendo que readDb() lee tu archivo JSON
 
-  // Buscar en la sección rfid
-  const vehiculo = db.rfid.find((v) => v.placa === placa); // Buscar por placa
+    // Buscar en la sección rfid
+    const vehiculo = db.rfid.find((v) => v.placa === placa); // Buscar por placa
 
-  // Verificar si se encontró el vehículo
-  if (vehiculo) {
-    res.json(vehiculo); // Devolver el vehículo encontrado
-  } else {
-    res.status(404).json({ message: "Vehículo no encontrado." }); // Mensaje de error si no se encuentra
+    // Verificar si se encontró el vehículo
+    if (vehiculo) {
+      res.status(200).json({ success: true, data: vehiculo }); // Devolver el vehículo encontrado
+    } else {
+      res
+        .status(404)
+        .json({ success: false, message: "Vehículo no encontrado." }); // Mensaje de error si no se encuentra
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error al obtener el vehículo." });
   }
 });
 
