@@ -25,7 +25,7 @@ const RFID = () => {
       console.log("Datos recibidos del API:", data); // Asegúrate de que estás recibiendo datos válidos
       if (data) {
         setVehiculoData(data);
-        setConductorData(data.conductor || {}); // Asegúrate de que 'conductor' sea una propiedad válida
+        setConductorData(data || {}); // Asegúrate de que 'conductor' sea una propiedad válida
         setErrorMessage("");
 
         // Captura la ubicación y la fecha/hora
