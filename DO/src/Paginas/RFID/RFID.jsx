@@ -8,8 +8,15 @@ import iconCalendar from "./calendar.png";
 import iconReloj from "./iconReloj.png";
 import iconUbicacion from "./iconUbicacion.png";
 import { getRFIDByPlate } from "./../../services/api"; // Asegúrate de que esta función esté bien implementada
+import sonidoRojo from "./rojo.mp3";
+// import sonidoVerde from "./verde.mp3"; // Asegúrate de tener este archivo
+// import sonidoAmarillo from "./amarillo.mp3"; // Asegúrate de tener este archivo
 
 const RFID = () => {
+  const audioRojo = new Audio(sonidoRojo);
+  const audioVerde = new Audio(sonidoVerde);
+  const audioAmarillo = new Audio(sonidoAmarillo);
+
   const [vehiculoData, setVehiculoData] = useState({});
   const [conductorData, setConductorData] = useState({});
   const [reporteData, setReporteData] = useState({
@@ -18,6 +25,7 @@ const RFID = () => {
     hora: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [estadoClass, setEstadoClass] = useState(styles.default); // Clase CSS para el estado
 
   const fetchVehicleData = async (tagID) => {
     try {
@@ -25,7 +33,7 @@ const RFID = () => {
       console.log("Datos recibidos del API:", data); // Asegúrate de que estás recibiendo datos válidos
       if (data) {
         setVehiculoData(data);
-        setConductorData(data || {}); // Asegúrate de que 'conductor' sea una propiedad válida
+        setConductorData(data.conductor || {}); // Asegúrate de que 'conductor' sea una propiedad válida
         setErrorMessage("");
 
         // Captura la ubicación y la fecha/hora
@@ -98,6 +106,22 @@ const RFID = () => {
     input.focus();
   }, []);
 
+  // Efecto para cambiar la clase de estado según el estado del vehículo
+  useEffect(() => {
+    if (vehiculoData.estado === "Reporte de Robo") {
+      setEstadoClass(`${styles.tituloEstado} ${styles.rojo}`); // Cambiar a rojo
+      audioRojo.play();
+    } else if (vehiculoData.estado === "Solvente") {
+      setEstadoClass(`${styles.tituloEstado} ${styles.verde}`); // Cambiar a verde
+      // audioVerde.play();
+    } else if (vehiculoData.estado === "Insolvente") {
+      setEstadoClass(`${styles.tituloEstado} ${styles.yellow}`); // Cambiar a amarillo
+      // audioAmarillo.play();
+    } else {
+      setEstadoClass(styles.default); // Clase por defecto
+    }
+  }, [vehiculoData.estado]);
+
   const handleSubmit = (event) => {
     event.preventDefault(); // Evita el comportamiento predeterminado del formulario
   };
@@ -119,8 +143,8 @@ const RFID = () => {
             <div className={styles.semaforoA}></div>
             <div className={styles.semaforoV}></div>
           </div>
-          <div className={styles.tituloEstado}>
-            <Label>Reporte de Robo</Label>
+          <div className={estadoClass}>
+            <Label>{vehiculoData.estado || "Estado no disponible"}</Label>
           </div>
         </div>
         {errorMessage && (

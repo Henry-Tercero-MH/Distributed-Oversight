@@ -74,7 +74,8 @@
       "modelo": "2023",
       "nombre": "Juan Pérez",
       "cui": "1234567890123",
-      "nit": "987654321"
+      "nit": "987654321",
+      "estado": "Reporte de Robo"
     },
     {
       "id": 2,
@@ -89,7 +90,8 @@
       "modelo": "2022",
       "nombre": "Ana García",
       "cui": "1234567890124",
-      "nit": "654321987"
+      "nit": "654321987",
+      "estado": "Reporte de Robo"
     },
     {
       "id": 3,
@@ -105,7 +107,7 @@
       "nombre": "Carlos López",
       "cui": "1234567890125",
       "nit": "321654987",
-      "estado": "Solvente"
+      "estado": "Insolvente"
     },
     {
       "id": 4,
@@ -120,7 +122,8 @@
       "modelo": "2020",
       "nombre": "Pedro Martínez",
       "cui": "1234567890126",
-      "nit": "789456123"
+      "nit": "789456123",
+      "estado": "Reporte de Robo"
     },
     {
       "id": 5,
@@ -135,7 +138,8 @@
       "modelo": "2019",
       "nombre": "María Fernández",
       "cui": "1234567890127",
-      "nit": "456789123"
+      "nit": "456789123",
+      "estado": "Reporte de Robo"
     }
   ],
   "reportes": [
@@ -152,6 +156,209 @@
       "cui": "sdfg",
       "estado": "Solvente",
       "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727235674639-captura.jpg"
+    },
+    {
+      "id": 3,
+      "placa": "123435",
+      "cui": "sadfgh",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727491614576-captura.jpg"
+    },
+    {
+      "id": 4,
+      "placa": "08356868",
+      "cui": "12321213",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727493871392-captura.jpg"
+    },
+    {
+      "id": 5,
+      "placa": "08356868",
+      "cui": "123",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494031713-captura.jpg"
+    },
+    {
+      "id": 6,
+      "placa": "08356868",
+      "cui": "123",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494183430-captura.jpg"
+    },
+    {
+      "id": 7,
+      "placa": "08356868",
+      "cui": "1234",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494284818-captura.jpg"
+    },
+    {
+      "id": 8,
+      "placa": "08356868",
+      "cui": "1234",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494474275-captura.jpg"
+    },
+    {
+      "id": 9,
+      "placa": "08356868",
+      "cui": "2134",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494546064-captura.jpg"
+    },
+    {
+      "id": 10,
+      "placa": "08356868",
+      "cui": "2134",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494658745-captura.jpg"
+    },
+    {
+      "id": 11,
+      "placa": "08356868",
+      "cui": "2345",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494706573-captura.jpg"
+    },
+    {
+      "id": 12,
+      "placa": "08356868",
+      "cui": "2345",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727494747836-captura.jpg"
+    },
+    {
+      "id": 13,
+      "placa": "08356868",
+      "cui": "12345",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727495245037-captura.jpg"
+    },
+    {
+      "id": 14,
+      "placa": "08356868",
+      "cui": "12345",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727495437550-captura.jpg"
+    },
+    {
+      "id": 15,
+      "placa": "08356868",
+      "cui": "12345",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727495476187-captura.jpg"
+    },
+    {
+      "id": 16,
+      "placa": "08356868",
+      "cui": "23r",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727495670951-captura.jpg"
+    },
+    {
+      "id": 17,
+      "placa": "08356868",
+      "cui": "23r",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727495832863-captura.jpg"
+    },
+    {
+      "id": 18,
+      "placa": "08356868",
+      "cui": "3456d",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727496298002-captura.jpg"
+    },
+    {
+      "id": 19,
+      "placa": "08356868",
+      "cui": "3456d",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727496427856-captura.jpg"
+    },
+    {
+      "id": 20,
+      "placa": "08356868",
+      "cui": "3456d",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727496432141-captura.jpg"
+    },
+    {
+      "id": 21,
+      "placa": "08356868",
+      "cui": "sdfgh234",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727496623245-captura.jpg"
+    },
+    {
+      "id": 22,
+      "placa": "08356868",
+      "cui": "sdfgh234",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727496932587-captura.jpg"
+    },
+    {
+      "id": 23,
+      "placa": "08356868",
+      "cui": "asdvb23",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727497538143-captura.jpg"
+    },
+    {
+      "id": 24,
+      "placa": "08356868",
+      "cui": "asdvb23",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727497569624-captura.jpg"
+    },
+    {
+      "id": 25,
+      "placa": "08356868",
+      "cui": "1234df",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727497614443-captura.jpg"
+    },
+    {
+      "id": 26,
+      "placa": "08356868",
+      "cui": "1234f",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727619265592-captura.jpg"
+    },
+    {
+      "id": 27,
+      "placa": "08356868",
+      "cui": "1234f",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727619416870-captura.jpg"
+    },
+    {
+      "id": 28,
+      "placa": "08356868",
+      "cui": "1234rtf",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727619555076-captura.jpg"
+    },
+    {
+      "id": 29,
+      "placa": "08356868",
+      "cui": "qwerty23",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727621342713-captura.jpg"
+    },
+    {
+      "id": 30,
+      "placa": "08430791",
+      "cui": "qwerty23",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727621477967-captura.jpg"
+    },
+    {
+      "id": 31,
+      "placa": "08449914",
+      "cui": "2324efg",
+      "estado": "Insolvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727625586998-captura.jpg"
     }
   ]
 }

@@ -198,5 +198,40 @@ router.get("/rfid", (req, res) => {
       .json({ success: false, message: "Error al obtener el vehículo." });
   }
 });
+router.put("/rfid/estado", (req, res) => {
+  const { placa, estado } = req.body; // Obtener la placa y el estado desde el cuerpo de la solicitud
+
+  if (!placa || !estado) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Placa y estado son requeridos." });
+  }
+
+  try {
+    const db = readDb();
+
+    // Buscar el vehículo según la placa en la sección `rfid`
+    const vehiculo = db.rfid.find((v) => v.placa === placa);
+
+    if (!vehiculo) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Vehículo no encontrado." });
+    }
+
+    // Actualizar el estado del vehículo
+    vehiculo.estado = estado;
+
+    // Guardar los cambios en el archivo `db.json`
+    writeDb(db);
+
+    // Devolver el vehículo actualizado
+    res.json({ success: true, data: vehiculo });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error al actualizar el estado." });
+  }
+});
 
 module.exports = router;

@@ -4,7 +4,7 @@ import Label from "../../componentes/Label/Label";
 import Input from "../../componentes/Input/Input";
 import SelectList from "../../componentes/Lista_Opciones/ListaOpciones";
 import poto from "./capturaFoto.jpeg";
-import { createReporte } from "../../services/api"; // Asegúrate de que esta importación sea correcta
+import { createReporte, updateEstadoRfid } from "../../services/api"; // Asegúrate de que esta importación sea correcta
 import { useNavigate } from "react-router-dom"; // Asegúrate de importar useNavigate
 
 const GenerarReporte = () => {
@@ -106,12 +106,6 @@ const GenerarReporte = () => {
       alert("Por favor, complete todos los datos antes de generar el reporte.");
       return;
     }
-    if (!capturedPhoto) {
-      alert(
-        "No se ha capturado una foto. Por favor, capture una antes de enviar."
-      );
-      return;
-    }
 
     // Convertir la foto capturada a Blob
     const response = await fetch(capturedPhoto);
@@ -126,11 +120,21 @@ const GenerarReporte = () => {
 
     try {
       // Enviar los datos usando createReporte
-      const response = await createReporte(formData);
-      console.log("Reporte agregado:", response);
+      const reporteResponse = await createReporte(formData);
+      console.log("Reporte agregado:", reporteResponse);
       alert("Reporte creado con éxito");
+
+      // Actualizar el estado en el RFID
+      const updatedVehicle = await updateEstadoRfid(placa, estado);
+
+      if (updatedVehicle.success) {
+        console.log("Estado actualizado en RFID:", updatedVehicle.data);
+        alert("Estado actualizado correctamente");
+      } else {
+        alert(updatedVehicle.message); // Mostrar mensaje de error si la actualización falla
+      }
     } catch (error) {
-      console.error("Error al enviar los datos:", error);
+      console.error("Error al enviar los datos:", error.message);
     }
   };
 

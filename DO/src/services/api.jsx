@@ -170,7 +170,6 @@ export const createReporte = async (data) => {
   try {
     const response = await fetch(`${API_URL}/reportes`, {
       method: "POST",
-      // No se debe establecer Content-Type manualmente cuando se envía FormData
       body: data,
     });
 
@@ -185,6 +184,42 @@ export const createReporte = async (data) => {
     throw error;
   }
 };
+export const updateEstadoRfid = async (placa, estado) => {
+  try {
+    const response = await fetch(`${API_URL}/rfid/estado`, {
+      // Usa API_URL aquí
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ placa, estado }),
+    });
+
+    // Verificar si la respuesta es válida
+    if (!response.ok) {
+      const errorData = await response.text(); // Intenta leer como texto en caso de que no sea JSON
+      throw new Error(
+        `Error al actualizar el estado: ${response.status} ${
+          errorData || response.statusText
+        }`
+      );
+    }
+
+    // Verificar que el contenido exista antes de parsear a JSON
+    const responseText = await response.text();
+    if (!responseText) {
+      throw new Error("La respuesta del servidor está vacía.");
+    }
+
+    const data = JSON.parse(responseText); // Procesar el JSON si existe
+    return { success: true, data }; // Retornar datos del vehículo actualizado
+  } catch (error) {
+    // Manejo de errores
+    console.error("Error en updateEstadoRfid:", error); // Mejora el seguimiento de errores
+    return { success: false, message: error.message || "Error de red" };
+  }
+};
+
 export const getRFIDByPlate = async (placa) => {
   try {
     const response = await fetch(

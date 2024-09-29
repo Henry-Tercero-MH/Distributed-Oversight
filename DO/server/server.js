@@ -195,6 +195,49 @@ app.get("/api/rfid", (req, res) => {
     }
   });
 });
+// Endpoint para actualizar el estado del vehículo
+app.put("/api/rfid/estado", (req, res) => {
+  const { placa, estado } = req.body;
+
+  if (!placa || !estado) {
+    return res.status(400).json({ error: "Placa y estado son requeridos." });
+  }
+
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) return res.status(500).json({ error: ERROR_DB_READ });
+
+    try {
+      const db = JSON.parse(data);
+      if (!db.rfid || !Array.isArray(db.rfid)) {
+        return res
+          .status(500)
+          .json({
+            error: "La base de datos no contiene vehículos RFID válidos.",
+          });
+      }
+
+      const vehiculo = db.rfid.find((v) => v.placa === placa);
+
+      if (!vehiculo) {
+        return res
+          .status(404)
+          .json({ success: false, message: ERROR_VEHICLE_NOT_FOUND });
+      }
+
+      vehiculo.estado = estado;
+
+      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
+        if (err)
+          return res.status(500).json({ error: "Error al guardar el estado." });
+
+        res.json({ success: true, data: vehiculo });
+      });
+    } catch (parseError) {
+      console.error("Error al procesar la base de datos:", parseError);
+      res.status(500).json({ error: ERROR_DB_PARSE });
+    }
+  });
+});
 
 // Iniciar el servidor
 app.listen(port, () => {
