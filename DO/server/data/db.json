@@ -75,7 +75,7 @@
       "nombre": "Juan Pérez",
       "cui": "1234567890123",
       "nit": "987654321",
-      "estado": "Reporte de Robo"
+      "estado": "Solvente"
     },
     {
       "id": 2,
@@ -359,6 +359,13 @@
       "cui": "2324efg",
       "estado": "Insolvente",
       "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727625586998-captura.jpg"
+    },
+    {
+      "id": 32,
+      "placa": "08356868",
+      "cui": "123432",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727644612716-captura.jpg"
     }
   ]
 }

@@ -237,5 +237,23 @@ router.put("/rfid/estado", (req, res) => {
       .json({ success: false, message: "Error al actualizar el estado." });
   }
 });
+// Verificar si el correo electrónico ya existe
+router.get("/check-email", (req, res) => {
+  const { email } = req.query; // Obtener el correo desde los parámetros de consulta
+
+  // Validar que se haya proporcionado un correo
+  if (!email) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Se requiere el parámetro 'email'." });
+  }
+
+  const db = readDb();
+
+  // Verificar si el correo ya existe en la base de datos
+  const exists = db.usuarios.some((usuario) => usuario.email === email);
+
+  res.json({ success: true, exists }); // Retornar si el correo existe
+});
 
 module.exports = router;

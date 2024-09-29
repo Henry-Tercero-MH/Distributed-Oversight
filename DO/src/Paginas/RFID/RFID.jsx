@@ -9,13 +9,15 @@ import iconReloj from "./iconReloj.png";
 import iconUbicacion from "./iconUbicacion.png";
 import { getRFIDByPlate } from "./../../services/api"; // Asegúrate de que esta función esté bien implementada
 import sonidoRojo from "./rojo.mp3";
+import sonidoVerde from "./verde.mp3";
+import sonidoAmarillo from "./amarillo.mp3";
 // import sonidoVerde from "./verde.mp3"; // Asegúrate de tener este archivo
 // import sonidoAmarillo from "./amarillo.mp3"; // Asegúrate de tener este archivo
 
 const RFID = () => {
   const audioRojo = new Audio(sonidoRojo);
-  // const audioVerde = new Audio(sonidoVerde);
-  // const audioAmarillo = new Audio(sonidoAmarillo);
+  const audioVerde = new Audio(sonidoVerde);
+  const audioAmarillo = new Audio(sonidoAmarillo);
 
   const [vehiculoData, setVehiculoData] = useState({});
   const [conductorData, setConductorData] = useState({});
@@ -113,10 +115,10 @@ const RFID = () => {
       audioRojo.play();
     } else if (vehiculoData.estado === "Solvente") {
       setEstadoClass(`${styles.tituloEstado} ${styles.verde}`); // Cambiar a verde
-      // audioVerde.play();
+      audioVerde.play();
     } else if (vehiculoData.estado === "Insolvente") {
       setEstadoClass(`${styles.tituloEstado} ${styles.yellow}`); // Cambiar a amarillo
-      // audioAmarillo.play();
+      audioAmarillo.play();
     } else {
       setEstadoClass(styles.default); // Clase por defecto
     }
