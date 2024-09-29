@@ -49,6 +49,20 @@
       "contraseña": "hashed_password_here",
       "nip": "3344",
       "cui": "1234567890127"
+    },
+    {
+      "email": "hterceroh@miumg.edu.gt",
+      "contraseña": "Passw0rd."
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hterceroh@miuaamg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12345",
+      "cui": "1234"
     }
   ],
   "lecturas": [

@@ -38,11 +38,10 @@ router.get("/usuarios/:id", (req, res) => {
 router.post("/usuarios", (req, res) => {
   const db = readDb();
   const nuevoUsuario = req.body;
-  nuevoUsuario.id =
-    db.usuarios.length > 0 ? Math.max(...db.usuarios.map((u) => u.id)) + 1 : 1;
+  nuevoUsuario.id = db.usuarios.length + 1;
   db.usuarios.push(nuevoUsuario);
   writeDb(db);
-  res.status(201).json({ success: true, data: nuevoUsuario });
+  res.status(201).json(nuevoUsuario);
 });
 
 // Editar usuario existente
@@ -52,9 +51,9 @@ router.put("/usuarios/:id", (req, res) => {
   if (index !== -1) {
     db.usuarios[index] = { ...db.usuarios[index], ...req.body };
     writeDb(db);
-    res.json({ success: true, data: db.usuarios[index] });
+    res.json(db.usuarios[index]);
   } else {
-    res.status(404).json({ success: false, message: "Usuario no encontrado" });
+    res.status(404).json({ message: "Usuario no encontrado" });
   }
 });
 
@@ -65,9 +64,9 @@ router.delete("/usuarios/:id", (req, res) => {
   if (index !== -1) {
     const eliminado = db.usuarios.splice(index, 1);
     writeDb(db);
-    res.json({ success: true, data: eliminado });
+    res.json(eliminado);
   } else {
-    res.status(404).json({ success: false, message: "Usuario no encontrado" });
+    res.status(404).json({ message: "Usuario no encontrado" });
   }
 });
 

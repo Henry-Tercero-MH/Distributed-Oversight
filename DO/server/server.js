@@ -42,40 +42,28 @@ app.get("/api/usuarios", (req, res) => {
 });
 // Ruta para agregar un nuevo usuario
 app.post("/api/usuarios", (req, res) => {
-  const { email, contraseña } = req.body;
+  const newUser = req.body;
 
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) {
+      console.error("Error al leer la base de datos:", err);
       return res.status(500).json({ error: "Error al leer la base de datos" });
     }
+
     try {
       const db = JSON.parse(data);
-      const usuarios = db.usuarios || [];
+      db.usuarios.push(newUser);
 
-      // Verifica si el correo ya existe
-      const usuarioExistente = usuarios.find((user) => user.email === email);
-      if (usuarioExistente) {
-        return res.status(400).json({ error: "El correo ya está registrado." });
-      }
-
-      // Agregar el nuevo usuario
-      const nuevoUsuario = { email, contraseña }; // Asegúrate de incluir cualquier otro campo necesario
-      usuarios.push(nuevoUsuario);
-
-      // Guardar de nuevo en la base de datos
-      db.usuarios = usuarios;
       fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
         if (err) {
-          return res
-            .status(500)
-            .json({ error: "Error al guardar el nuevo usuario" });
+          console.error("Error al guardar el usuario:", err);
+          return res.status(500).json({ error: "Error al guardar el usuario" });
         }
-        res.status(201).json(nuevoUsuario); // Responder con el nuevo usuario
+        res.status(201).json(newUser);
       });
     } catch (parseError) {
-      return res
-        .status(500)
-        .json({ error: "Error al procesar la base de datos" });
+      console.error("Error al parsear el archivo JSON:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
     }
   });
 });

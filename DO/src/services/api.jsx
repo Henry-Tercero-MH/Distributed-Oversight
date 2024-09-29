@@ -22,23 +22,6 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Función para verificar si un correo electrónico ya existe en la base de datos
-export const checkEmailExists = async (email) => {
-  try {
-    const response = await fetch(
-      `${API_URL}/check-email?email=${encodeURIComponent(email)}`
-    );
-    if (!response.ok) {
-      throw new Error("Error al verificar el correo electrónico.");
-    }
-    const data = await response.json();
-    return data.exists; // Suponiendo que el backend responde con { exists: true/false }
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error al verificar el correo electrónico.");
-  }
-};
-
 // Función para registrar un nuevo usuario, con verificación de correo
 export const registerUser = async (userData) => {
   try {
@@ -66,6 +49,23 @@ export const registerUser = async (userData) => {
     return { success: true, user: data }; // Retornamos el usuario registrado
   } catch (error) {
     throw new Error(error.message || "Error de red");
+  }
+};
+
+// Función para verificar si un correo electrónico ya existe en la base de datos
+export const checkEmailExists = async (email) => {
+  try {
+    const response = await fetch(
+      `${API_URL}/check-email?email=${encodeURIComponent(email)}`
+    );
+    if (!response.ok) {
+      throw new Error("Error al verificar el correo electrónico.");
+    }
+    const data = await response.json();
+    return data.exists; // Suponiendo que el backend responde con { exists: true/false }
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error al verificar el correo electrónico.");
   }
 };
 
