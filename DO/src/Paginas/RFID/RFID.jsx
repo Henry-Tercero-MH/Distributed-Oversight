@@ -14,8 +14,8 @@ import sonidoRojo from "./rojo.mp3";
 
 const RFID = () => {
   const audioRojo = new Audio(sonidoRojo);
-  const audioVerde = new Audio(sonidoVerde);
-  const audioAmarillo = new Audio(sonidoAmarillo);
+  // const audioVerde = new Audio(sonidoVerde);
+  // const audioAmarillo = new Audio(sonidoAmarillo);
 
   const [vehiculoData, setVehiculoData] = useState({});
   const [conductorData, setConductorData] = useState({});
@@ -33,7 +33,7 @@ const RFID = () => {
       console.log("Datos recibidos del API:", data); // Asegúrate de que estás recibiendo datos válidos
       if (data) {
         setVehiculoData(data);
-        setConductorData(data.conductor || {}); // Asegúrate de que 'conductor' sea una propiedad válida
+        setConductorData(data || {}); // Asegúrate de que 'conductor' sea una propiedad válida
         setErrorMessage("");
 
         // Captura la ubicación y la fecha/hora

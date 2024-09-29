@@ -40,31 +40,29 @@ app.get("/api/usuarios", (req, res) => {
     }
   });
 });
-
-// Ruta para agregar un nuevo usuario
-app.post("/api/usuarios", (req, res) => {
-  const newUser = req.body;
+//ruta para agregar un usuario
+app.get("/api/usuarios", (req, res) => {
+  const { email } = req.query;
 
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) {
-      console.error("Error al leer la base de datos:", err);
       return res.status(500).json({ error: "Error al leer la base de datos" });
     }
-
     try {
       const db = JSON.parse(data);
-      db.usuarios.push(newUser);
+      const usuarios = db.usuarios;
 
-      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
-        if (err) {
-          console.error("Error al guardar el usuario:", err);
-          return res.status(500).json({ error: "Error al guardar el usuario" });
-        }
-        res.status(201).json(newUser);
-      });
+      // Verifica si el correo ya existe
+      if (email) {
+        const usuarioExistente = usuarios.find((user) => user.email === email);
+        return res.json({ exists: !!usuarioExistente });
+      }
+
+      res.json(usuarios);
     } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
-      res.status(500).json({ error: "Error al procesar la base de datos" });
+      return res
+        .status(500)
+        .json({ error: "Error al procesar la base de datos" });
     }
   });
 });
@@ -209,11 +207,9 @@ app.put("/api/rfid/estado", (req, res) => {
     try {
       const db = JSON.parse(data);
       if (!db.rfid || !Array.isArray(db.rfid)) {
-        return res
-          .status(500)
-          .json({
-            error: "La base de datos no contiene vehículos RFID válidos.",
-          });
+        return res.status(500).json({
+          error: "La base de datos no contiene vehículos RFID válidos.",
+        });
       }
 
       const vehiculo = db.rfid.find((v) => v.placa === placa);

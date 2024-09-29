@@ -38,7 +38,8 @@ router.get("/usuarios/:id", (req, res) => {
 router.post("/usuarios", (req, res) => {
   const db = readDb();
   const nuevoUsuario = req.body;
-  nuevoUsuario.id = db.usuarios.length + 1;
+  nuevoUsuario.id =
+    db.usuarios.length > 0 ? Math.max(...db.usuarios.map((u) => u.id)) + 1 : 1;
   db.usuarios.push(nuevoUsuario);
   writeDb(db);
   res.status(201).json({ success: true, data: nuevoUsuario });
@@ -161,7 +162,8 @@ router.get("/reportes", (req, res) => {
 router.post("/reportes", (req, res) => {
   const db = readDb();
   const nuevoReporte = req.body;
-  nuevoReporte.id = db.reportes.length + 1;
+  nuevoReporte.id =
+    db.reportes.length > 0 ? Math.max(...db.reportes.map((r) => r.id)) + 1 : 1;
   db.reportes.push(nuevoReporte);
   writeDb(db);
   res.status(201).json({ success: true, data: nuevoReporte });
@@ -198,6 +200,8 @@ router.get("/rfid", (req, res) => {
       .json({ success: false, message: "Error al obtener el vehículo." });
   }
 });
+
+// Actualizar el estado del vehículo
 router.put("/rfid/estado", (req, res) => {
   const { placa, estado } = req.body; // Obtener la placa y el estado desde el cuerpo de la solicitud
 
