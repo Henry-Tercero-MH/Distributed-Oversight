@@ -51,18 +51,54 @@
       "cui": "1234567890127"
     },
     {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
       "email": "hterceroh@miumg.edu.gt",
-      "contraseña": "Passw0rd."
+      "puesto": "Comisario",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12345",
+      "cui": "1213124"
     },
     {
       "nombre": "Henry Misael Tercero",
       "apellido": "Hernández",
-      "email": "hterceroh@miuaamg.edu.gt",
+      "email": "htercerohjsds@miumg.edu.gt",
+      "puesto": "Analista de Datos",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12323",
+      "cui": "123213"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "htercerdoh@miumg.edu.gt",
       "puesto": "Civil",
       "contraseña": "Passw0rd.",
       "confirmacionContraseña": "Passw0rd.",
-      "nip": "12345",
-      "cui": "1234"
+      "nip": "12323",
+      "cui": "2538992730919"
+    },
+    {
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "hteassssrceroh@miumg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "1234",
+      "cui": "25"
+    },
+    {
+      "nombre": "Henry Misael",
+      "apellido": "Tercero Hernandez",
+      "email": "hterceroh@miulkijnmg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "123242",
+      "cui": "2538992730919"
     }
   ],
   "lecturas": [
@@ -89,7 +125,9 @@
       "nombre": "Juan Pérez",
       "cui": "1234567890123",
       "nit": "987654321",
-      "estado": "Solvente"
+      "estado": "Solvente",
+      "fotoVehiculo": "https://www.toyota.com.gt/hubfs/nuevo-hilux-color-rojo.jpg",
+      "fotoConductor": "https://impactolatino.com/wp-content/uploads/2016/06/17.jpg"
     },
     {
       "id": 2,
@@ -105,7 +143,9 @@
       "nombre": "Ana García",
       "cui": "1234567890124",
       "nit": "654321987",
-      "estado": "Reporte de Robo"
+      "estado": "Reporte de Robo",
+      "fotoVehiculo": "https://www.centroamerica.ford.com/content/dam/Ford/website-assets/cca/pa/nameplate/ranger/2023/colorizer/blue-lightning/ford-ca-ranger-2023-pickup-exterior-color-blue-lightning-xl-xlt.jpg.dam.full.high.jpg/1684550087955.jpg",
+      "fotoConductor": "https://b2472105.smushcdn.com/2472105/wp-content/uploads/2023/09/Poses-Perfil-Profesional-ago.-10-2023-1024x1024.jpg?lossy=1&strip=1&webp=1"
     },
     {
       "id": 3,
@@ -121,7 +161,9 @@
       "nombre": "Carlos López",
       "cui": "1234567890125",
       "nit": "321654987",
-      "estado": "Insolvente"
+      "estado": "Insolvente",
+      "fotoVehiculo": "https://images.prd.kavak.io/eyJidWNrZXQiOiJrYXZhay1pbWFnZXMiLCJrZXkiOiJpbWFnZXMvMzIwNDMxL0VYVEVSSU9SLWZyb250U2lkZVBpbG90TmVhci0xNzE2Mzk5MDE1MDgwLmpwZWciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgxMCwiaGVpZ2h0Ijo0NjV9fX0=",
+      "fotoConductor": "https://cdn-3.expansion.mx/dims4/default/47ecb66/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F03%2F9f%2Fb5021f39448e83b2e3d2768adbc3%2Fcarlos-lopez-moctezuma-90148603-131.jpg"
     },
     {
       "id": 4,
@@ -137,7 +179,9 @@
       "nombre": "Pedro Martínez",
       "cui": "1234567890126",
       "nit": "789456123",
-      "estado": "Reporte de Robo"
+      "estado": "Reporte de Robo",
+      "fotoVehiculo": "https://img.freepik.com/fotos-premium/camion-carga-camion-verde-sobre-fondo-blanco_899263-423.jpg?w=740",
+      "fotoConductor": "https://www.labsaenzrenauld.com/wp-content/uploads/2020/10/Perfil-hombre-ba%CC%81sico_738242395.jpg"
     },
     {
       "id": 5,
@@ -153,7 +197,9 @@
       "nombre": "María Fernández",
       "cui": "1234567890127",
       "nit": "456789123",
-      "estado": "Reporte de Robo"
+      "estado": "Reporte de Robo",
+      "fotoVehiculo": "https://www.kia.com.gt/images/modelos/sportage/360/blanco-perla/01.png",
+      "fotoConductor": "https://media.licdn.com/dms/image/v2/D5603AQF6BwMhY3CTEg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701980394276?e=1733356800&v=beta&t=ARDFIYdaxEFN70ql-pcQInlsZTUlvaS2Wl4t_V0_Pxc"
     }
   ],
   "reportes": [

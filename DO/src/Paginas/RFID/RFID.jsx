@@ -146,7 +146,9 @@ const RFID = () => {
             <div className={styles.semaforoV}></div>
           </div>
           <div className={estadoClass}>
-            <Label>{vehiculoData.estado || "Estado no disponible"}</Label>
+            <Label className={styles.estado}>
+              {vehiculoData.estado || "Estado no disponible"}
+            </Label>
           </div>
         </div>
         {errorMessage && (
@@ -157,7 +159,7 @@ const RFID = () => {
         <div className={styles.cajaMadre}>
           <div className={styles.contenedor2}>
             <div className={styles.imagenVehiculo}>
-              <img src={imagenVehiculo} alt="Vehículo" />
+              <img src={vehiculoData.fotoVehiculo} alt="Vehículo" />
             </div>
             <div className={styles.datosTitulo}>
               <Label>Datos del Vehiculo</Label>
@@ -188,7 +190,7 @@ const RFID = () => {
           </div>
           <div className={styles.contenedor2}>
             <div className={styles.imagenConductor}>
-              <img src={imagenUsuario} alt="Conductor" />
+              <img src={conductorData.fotoConductor} alt="Conductor" />
             </div>
             <div className={styles.datosTitulo}>
               <Label>Datos del Conductor</Label>

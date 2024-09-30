@@ -66,11 +66,11 @@
 
 .verde {
   background-color: green;
-  animation: parpadeo 1s infinite; /* Efecto de parpadeo */
+  animation: parpadeo 0.5s infinite; /* Efecto de parpadeo */
 }
 .yellow {
-  background-color: yellow;
-  animation: parpadeo 1s infinite; /* Efecto de parpadeo */
+  background-color: rgb(255, 255, 0);
+  animation: parpadeo 0.5s infinite; /* Efecto de parpadeo */
 }
 
 @keyframes parpadeo {
@@ -86,6 +86,19 @@
 .tituloEstado label {
   font-size: 30px;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  padding-top: 20px;
+}
+
+.estado {
+  text-align: center;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  align-items: center;
 }
 .datosTitulo label {
   height: 80px;
@@ -179,5 +192,71 @@
 
   .menu {
     top: 100px; /* Mueve el menú debajo del header en pantallas más grandes */
+  }
+  .contenedorFormulario {
+    width: 100%;
+    display: inline-block;
+    display: block;
+    justify-content: center;
+    border-radius: 15px 15px;
+    overflow: hidden;
+    gap: 50px;
+  }
+  .cajaSemaforo {
+    height: 120px;
+  }
+  .tituloEstado {
+    height: 120px;
+    border-radius: 5px;
+  }
+  .formulario {
+    display: inline-block;
+    background-color: var(--colorOver);
+    width: 900px;
+    height: auto;
+    text-align: center;
+    padding: 10px 10px;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+    gap: 15px;
+    margin-top: 100px;
+    margin-bottom: 500px;
+  }
+  .contenedor1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    gap: 5px;
+  }
+  .contenedor2 {
+    width: 370px;
+    text-align: center;
+    font-size: 24px;
+    padding: 10px 10px;
+    box-shadow: 0 4px 8px 0 rgb(254, 254, 254);
+  }
+  .cajaMadre {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--colorOver);
+    box-shadow: 0 4px 8px 0 rgb(254, 254, 254);
+    width: 100%;
+    gap: 10px;
+  }
+  .imagenConductor img {
+    height: 250px;
+    width: 100%;
+  }
+  .imagenVehiculo img {
+    height: 250px;
+    width: 100%;
+  }
+  .datosTitulo label {
+    height: 100px;
+    background-color: rgba(255, 228, 196, 0.322);
   }
 }

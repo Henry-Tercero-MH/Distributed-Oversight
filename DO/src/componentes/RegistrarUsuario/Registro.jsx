@@ -22,8 +22,9 @@ const RegistroUsuario = () => {
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [cuiError, setCuiError] = useState(""); // Estado para el error de CUI
+  const [nipError, setNipError] = useState(""); // Estado para el error de NIP
   const [isFormValid, setIsFormValid] = useState(false);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const RegistroUsuario = () => {
       contraseña,
       confirmacionContraseña,
       nip,
-      cui,
+      cui, // Añadido CUI
     } = formData;
 
     if (
@@ -46,9 +47,11 @@ const RegistroUsuario = () => {
       contraseña &&
       confirmacionContraseña &&
       nip &&
-      cui &&
+      cui && // Verificar CUI
       !passwordError &&
       !emailError &&
+      !cuiError && // Verificar error de CUI
+      !nipError && // Verificar error de NIP
       contraseña === confirmacionContraseña
     ) {
       setIsFormValid(true);
@@ -56,7 +59,7 @@ const RegistroUsuario = () => {
     } else {
       setIsFormValid(false);
     }
-  }, [formData, passwordError, emailError]);
+  }, [formData, passwordError, emailError, cuiError, nipError]); // Añadido nipError
 
   const validatePassword = (pwd) => {
     let errors = "";
@@ -72,6 +75,45 @@ const RegistroUsuario = () => {
     return errors.trim();
   };
 
+  // Función para validar el CUI
+  const cuiIsValid = (cui) => {
+    if (!cui) return true; // CUI vacío es válido en este contexto
+
+    const cuiRegExp = /^[0-9]{4}\s?[0-9]{5}\s?[0-9]{4}$/;
+    if (!cuiRegExp.test(cui)) {
+      return false; // Formato inválido
+    }
+
+    cui = cui.replace(/\s/g, "");
+    const depto = parseInt(cui.substring(9, 11), 10);
+    const muni = parseInt(cui.substring(11, 13), 10);
+    const numero = cui.substring(0, 8);
+    const verificador = parseInt(cui.substring(8, 9), 10);
+
+    const munisPorDepto = [
+      17, 8, 16, 16, 13, 14, 19, 8, 24, 21, 9, 30, 32, 21, 8, 17, 14, 5, 11, 11,
+      7, 17,
+    ];
+
+    if (depto === 0 || muni === 0) return false;
+    if (depto > munisPorDepto.length) return false;
+    if (muni > munisPorDepto[depto - 1]) return false;
+
+    let total = 0;
+    for (let i = 0; i < numero.length; i++) {
+      total += numero[i] * (i + 2);
+    }
+
+    const modulo = total % 11;
+    return modulo === verificador;
+  };
+
+  // Función para validar el NIP
+  const nipIsValid = (nip) => {
+    const nipRegExp = /^[0-9]{5}$/; // Validación de 5 dígitos numéricos
+    return nipRegExp.test(nip);
+  };
+
   const handleInputChange = async (e) => {
     const { id, value } = e.target;
     setFormData((prevState) => ({
@@ -79,26 +121,44 @@ const RegistroUsuario = () => {
       [id]: value,
     }));
 
-    if (id === "contraseña") {
-      setPasswordError(validatePassword(value));
-    } else if (id === "confirmacionContraseña") {
-      if (value !== formData.contraseña) {
-        setPasswordError("Las contraseñas no coinciden.");
-      } else {
-        setPasswordError(validatePassword(formData.contraseña));
-      }
-    } else if (id === "email") {
-      try {
-        const exists = await checkEmailExists(value);
-        if (exists) {
-          setEmailError("El correo electrónico ya está registrado.");
+    switch (id) {
+      case "contraseña":
+        setPasswordError(validatePassword(value));
+        break;
+      case "confirmacionContraseña":
+        if (value !== formData.contraseña) {
+          setPasswordError("Las contraseñas no coinciden.");
         } else {
-          setEmailError("");
+          setPasswordError(validatePassword(formData.contraseña));
         }
-      } catch (err) {
-        console.log(err);
-        setError("Error al verificar el correo electrónico.");
-      }
+        break;
+      case "email":
+        try {
+          const exists = await checkEmailExists(value);
+          setEmailError(
+            exists ? "El correo electrónico ya está registrado." : ""
+          );
+        } catch (err) {
+          console.log(err);
+          setError("Error al verificar el correo electrónico.");
+        }
+        break;
+      case "cui":
+        if (!cuiIsValid(value)) {
+          setCuiError("CUI con formato inválido o no existe.");
+        } else {
+          setCuiError("");
+        }
+        break;
+      case "nip":
+        if (!nipIsValid(value)) {
+          setNipError("El NIP debe tener exactamente 5 dígitos.");
+        } else {
+          setNipError("");
+        }
+        break;
+      default:
+        break;
     }
   };
 
@@ -113,9 +173,7 @@ const RegistroUsuario = () => {
     try {
       const response = await registerUser(formData);
       console.log("Usuario registrado:", response);
-
       alert("Usuario agregado exitosamente");
-
       navigate("/login");
     } catch (error) {
       setError(error.message || "Error al registrar el usuario.");
@@ -204,13 +262,18 @@ const RegistroUsuario = () => {
         <div className={styles.cajaEntrada}>
           <div className={styles.grupoEntrada}>
             <Label htmlFor="nip">NIP</Label>
-            <Input
-              type="number"
-              id="nip"
-              value={formData.nip}
-              onChange={handleInputChange}
-              placeholder="NIP de seguridad..."
-            />
+            <div className={styles.nip}>
+              <div className={styles.inputContainer}>
+                <Input
+                  type="number"
+                  id="nip"
+                  value={formData.nip}
+                  onChange={handleInputChange}
+                  placeholder="digita tu NIP"
+                />
+                <Label>-P</Label>
+              </div>
+            </div>
           </div>
           <div className={styles.grupoEntrada}>
             <Label htmlFor="cui">CUI</Label>
@@ -219,19 +282,23 @@ const RegistroUsuario = () => {
               id="cui"
               value={formData.cui}
               onChange={handleInputChange}
-              placeholder="DPI..."
+              placeholder="digita tu CUI"
             />
           </div>
         </div>
+        {error && <p className={styles.error}>{error}</p>}
         {passwordError && <p className={styles.error}>{passwordError}</p>}
         {emailError && <p className={styles.error}>{emailError}</p>}
-        {error && <p className={styles.error}>{error}</p>}
+        {cuiError && <p className={styles.error}>{cuiError}</p>}{" "}
+        {/* Mensaje de error para CUI */}
+        {nipError && <p className={styles.error}>{nipError}</p>}{" "}
+        {/* Mensaje de error para NIP */}
         <button
           type="submit"
           className={styles.botonRegistro}
           disabled={!isFormValid}
         >
-          Registrar usuario
+          Registrar
         </button>
       </form>
     </section>

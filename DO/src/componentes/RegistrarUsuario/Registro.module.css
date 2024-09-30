@@ -65,6 +65,16 @@
   border-radius: 15px;
   font-size: 30px;
 }
+.nip {
+  display: flex; /* Usar flex para alinear elementos en una línea */
+  align-items: center; /* Alinear verticalmente al centro */
+}
+
+.es .inputContainer {
+  display: flex; /* Para alinear el input y el sufijo */
+  align-items: center; /* Alinear verticalmente al centro */
+}
+
 .titulo {
   font-size: 40px;
   text-transform: uppercase;
