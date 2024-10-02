@@ -5,6 +5,8 @@ const cors = require("cors");
 const multer = require("multer"); // Asegúrate de haber instalado multer
 const app = express();
 const port = 3001;
+// Importa uuid al principio de tu archivo
+const { v4: uuidv4 } = require("uuid");
 
 // Usa cors para permitir solicitudes desde otros dominios
 app.use(cors());
@@ -40,9 +42,32 @@ app.get("/api/usuarios", (req, res) => {
     }
   });
 });
-// Ruta para agregar un nuevo usuario
-app.post("/api/usuarios", (req, res) => {
-  const newUser = req.body;
+// Ruta para agregar una nueva lectura con todos los detalles
+app.post("/api/lecturas", (req, res) => {
+  const nuevaLectura = req.body;
+
+  // Validar que se hayan proporcionado todos los campos requeridos
+  if (
+    !nuevaLectura.uso ||
+    !nuevaLectura.tipo ||
+    !nuevaLectura.linea ||
+    !nuevaLectura.chasis ||
+    !nuevaLectura.serie ||
+    !nuevaLectura.color ||
+    !nuevaLectura.placa ||
+    !nuevaLectura.modelo ||
+    !nuevaLectura.nombre ||
+    !nuevaLectura.cui ||
+    !nuevaLectura.nit ||
+    !nuevaLectura.estado ||
+    !nuevaLectura.fotoVehiculo ||
+    !nuevaLectura.fotoConductor ||
+    !nuevaLectura.ubicacion ||
+    !nuevaLectura.fecha ||
+    !nuevaLectura.hora
+  ) {
+    return res.status(400).json({ error: "Faltan datos requeridos." });
+  }
 
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) {
@@ -52,17 +77,29 @@ app.post("/api/usuarios", (req, res) => {
 
     try {
       const db = JSON.parse(data);
-      db.usuarios.push(newUser);
+      db.lecturas = db.lecturas || []; // Asegúrate de que existe 'lecturas'
 
+      // Aquí es donde debes generar el nuevo ID único
+      const nuevaLecturaConId = {
+        id: uuidv4(), // Generar un nuevo ID único
+        ...nuevaLectura, // Usar el resto de los datos de la lectura
+      };
+
+      // Agregar la nueva lectura
+      db.lecturas.push(nuevaLecturaConId);
+
+      // Guardar las actualizaciones en db.json
       fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
         if (err) {
-          console.error("Error al guardar el usuario:", err);
-          return res.status(500).json({ error: "Error al guardar el usuario" });
+          console.error("Error al guardar la lectura:", err);
+          return res.status(500).json({ error: "Error al guardar la lectura" });
         }
-        res.status(201).json(newUser);
+        console.log(nuevaLecturaConId);
+
+        res.status(201).json(nuevaLecturaConId); // Responder con la nueva lectura
       });
     } catch (parseError) {
-      console.error("Error al parsear el archivo JSON:", parseError);
+      console.error("Error al procesar la base de datos:", parseError);
       res.status(500).json({ error: "Error al procesar la base de datos" });
     }
   });
@@ -110,6 +147,7 @@ const upload = multer({ storage: storage });
 
 // Ruta para manejar la creación de reportes
 app.post("/api/reportes", upload.single("photo"), (req, res) => {
+  console.log(req.body); // Agregar esta línea para depuración
   const { placa, cui, estado } = req.body;
   const photo = req.file ? req.file.path : null;
 
@@ -154,35 +192,106 @@ app.post("/api/reportes", upload.single("photo"), (req, res) => {
   });
 });
 
-// Endpoint para agregar una nueva lectura
+const { log } = require("console");
+// Endpoint para agregar una nueva lectura con todos los detalles
 app.post("/api/lecturas", (req, res) => {
-  const nuevaLectura = req.body;
+  console.log(req.body); // Agregar esta línea para depuración
+
+  // Extraer los datos del cuerpo de la solicitud
+  const {
+    uso,
+    tipo,
+    linea,
+    chasis,
+    serie,
+    color,
+    placa,
+    modelo,
+    nombre,
+    cui,
+    nit,
+    estado,
+    fotoVehiculo,
+    fotoConductor,
+    ubicacion,
+    fecha,
+    hora,
+  } = req.body;
+
+  // Validar que se hayan proporcionado todos los campos requeridos
+  if (
+    !uso ||
+    !tipo ||
+    !linea ||
+    !chasis ||
+    !serie ||
+    !color ||
+    !placa ||
+    !modelo ||
+    !nombre ||
+    !cui ||
+    !nit ||
+    !estado ||
+    !fotoVehiculo ||
+    !fotoConductor ||
+    !ubicacion ||
+    !fecha ||
+    !hora
+  ) {
+    return res.status(400).json({ error: "Faltan datos requeridos." });
+  }
 
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) {
+      console.error("Error al leer la base de datos:", err);
       return res.status(500).json({ error: "Error al leer la base de datos" });
     }
 
     try {
       const db = JSON.parse(data);
-      nuevaLectura.id = db.lecturas.length + 1; // Asignar un nuevo ID
+      db.lecturas = db.lecturas || []; // Asegúrate de que existe 'lecturas'
 
-      db.lecturas.push(nuevaLectura); // Agregar la nueva lectura
+      // Aquí es donde debes generar el nuevo ID único
+      const nuevaLectura = {
+        id: uuidv4(), // Generar un nuevo ID único
+        uso,
+        tipo,
+        linea,
+        chasis,
+        serie,
+        color,
+        placa,
+        modelo,
+        nombre,
+        cui,
+        nit,
+        estado,
+        fotoVehiculo,
+        fotoConductor,
+        fecha,
+        hora,
+        ubicacion,
+      };
 
+      // Agregar la nueva lectura
+      db.lecturas.push(nuevaLectura);
+
+      // Guardar las actualizaciones en db.json
       fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
         if (err) {
+          console.error("Error al guardar la lectura:", err);
           return res.status(500).json({ error: "Error al guardar la lectura" });
         }
+        console.log(nuevaLectura);
+
         res.status(201).json(nuevaLectura); // Responder con la nueva lectura
       });
     } catch (parseError) {
-      return res
-        .status(500)
-        .json({ error: "Error al procesar la base de datos" });
+      console.error("Error al procesar la base de datos:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
     }
   });
 });
-
 // Ruta para obtener datos de rfid
 app.get("/api/rfid", (req, res) => {
   const { placa } = req.query; // Obtener placa desde los parámetros de consulta

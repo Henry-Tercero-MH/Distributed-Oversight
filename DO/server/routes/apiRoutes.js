@@ -254,5 +254,104 @@ router.get("/check-email", (req, res) => {
 
   res.json({ success: true, exists }); // Retornar si el correo existe
 });
+// Endpoint para agregar una nueva lectura con todos los detalles
+router.post("/lecturas", (req, res) => {
+  console.log(req.body); // Agregar esta línea para depuración
+
+  // Extraer los datos del cuerpo de la solicitud
+  const {
+    uso,
+    tipo,
+    linea,
+    chasis,
+    serie,
+    color,
+    placa,
+    modelo,
+    nombre,
+    cui,
+    nit,
+    estado,
+    fotoVehiculo,
+    fotoConductor,
+    ubicacion,
+    fecha,
+    hora,
+  } = req.body;
+
+  // Validar que se hayan proporcionado todos los campos requeridos
+  if (
+    !uso ||
+    !tipo ||
+    !linea ||
+    !chasis ||
+    !serie ||
+    !color ||
+    !placa ||
+    !modelo ||
+    !nombre ||
+    !cui ||
+    !nit ||
+    !estado ||
+    !fotoVehiculo ||
+    !fotoConductor ||
+    !ubicacion ||
+    !fecha ||
+    !hora
+  ) {
+    return res.status(400).json({ error: "Faltan datos requeridos." });
+  }
+
+  // Leer el archivo db.json
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error al leer la base de datos:", err);
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+
+    try {
+      const db = JSON.parse(data);
+      db.lecturas = db.lecturas || []; // Asegúrate de que existe 'lecturas'
+
+      // Crear un nuevo objeto de lectura
+      const nuevaLectura = {
+        id: uuidv4(), // Generar un nuevo ID único
+        uso,
+        tipo,
+        linea,
+        chasis,
+        serie,
+        color,
+        placa,
+        modelo,
+        nombre,
+        cui,
+        nit,
+        estado,
+        fotoVehiculo,
+        fotoConductor,
+        fecha,
+        hora,
+        ubicacion,
+      };
+
+      // Agregar la nueva lectura
+      db.lecturas.push(nuevaLectura);
+
+      // Guardar las actualizaciones en db.json
+      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
+        if (err) {
+          console.error("Error al guardar la lectura:", err);
+          return res.status(500).json({ error: "Error al guardar la lectura" });
+        }
+        console.log("Nueva lectura guardada:", nuevaLectura);
+        res.status(201).json(nuevaLectura); // Responder con la nueva lectura
+      });
+    } catch (parseError) {
+      console.error("Error al procesar la base de datos:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
+    }
+  });
+});
 
 module.exports = router;

@@ -102,12 +102,26 @@
     }
   ],
   "lecturas": [
+    {},
     {
-      "id": 1,
-      "conductor": "Juan Pérez",
+      "id": "74ffa8df-01cf-4b77-ad54-7b83904a15c8",
+      "uso": "Transporte",
+      "tipo": "Camioneta",
+      "linea": "Hilux",
+      "chasis": "ABC123456",
+      "serie": "XYZ987654",
+      "color": "Rojo",
       "placa": "08356868",
-      "fechaHora": "2024-08-27T14:00:00Z",
-      "ubicacion": "14.634915,-90.506882"
+      "modelo": "2023",
+      "nombre": "Juan Pérez",
+      "cui": "1234567890123",
+      "nit": "987654321",
+      "estado": "Solvente",
+      "fotoVehiculo": "https://www.toyota.com.gt/hubfs/nuevo-hilux-color-rojo.jpg",
+      "fotoConductor": "https://impactolatino.com/wp-content/uploads/2016/06/17.jpg",
+      "fecha": "2/10/2024",
+      "hora": "13:57:38",
+      "ubicacion": "Lat: 14.7030016, Lon: -91.6455424"
     }
   ],
   "rfid": [
@@ -426,6 +440,13 @@
       "cui": "123432",
       "estado": "Solvente",
       "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727644612716-captura.jpg"
+    },
+    {
+      "id": 33,
+      "placa": "08356868",
+      "cui": "123245465434",
+      "estado": "Solvente",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1727886247571-captura.jpg"
     }
   ]
 }
