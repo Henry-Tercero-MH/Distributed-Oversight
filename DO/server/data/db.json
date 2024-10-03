@@ -709,6 +709,27 @@
       "ubicacion": "Lat: 14.7030016, Lon: -91.6455424",
       "fecha": "2/10/2024",
       "hora": "20:51:47"
+    },
+    {
+      "id": "2e8d8202-4805-44fb-9f5e-1918459734de",
+      "uso": "Transporte",
+      "tipo": "Sedán",
+      "linea": "Accord",
+      "chasis": "GHI789012",
+      "serie": "OPQ345678",
+      "asientos": 5,
+      "color": "Negro",
+      "placa": "08449914",
+      "modelo": "2021",
+      "nombre": "Carlos López",
+      "estado": "Insolvente",
+      "cui": "1234567890125",
+      "nit": "321654987",
+      "fotoVehiculo": "https://images.prd.kavak.io/eyJidWNrZXQiOiJrYXZhay1pbWFnZXMiLCJrZXkiOiJpbWFnZXMvMzIwNDMxL0VYVEVSSU9SLWZyb250U2lkZVBpbG90TmVhci0xNzE2Mzk5MDE1MDgwLmpwZWciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgxMCwiaGVpZ2h0Ijo0NjV9fX0=",
+      "fotoConductor": "https://cdn-3.expansion.mx/dims4/default/47ecb66/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F03%2F9f%2Fb5021f39448e83b2e3d2768adbc3%2Fcarlos-lopez-moctezuma-90148603-131.jpg",
+      "ubicacion": "Lat: 14.7030016, Lon: -91.6455424",
+      "fecha": "2/10/2024",
+      "hora": "21:11:04"
     }
   ],
   "rfid": [
