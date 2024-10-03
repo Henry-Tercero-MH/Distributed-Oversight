@@ -23,7 +23,6 @@
   align-content: center;
   overflow: hidden;
   gap: 15px;
-
   margin-bottom: 500px;
 }
 .imagenVehiculo img {
@@ -45,6 +44,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50% 50%;
+  color: black;
 }
 .semaforoV {
   background-color: green;
@@ -62,25 +62,46 @@
 .rojo {
   background-color: red;
   animation: parpadeo 1s infinite; /* Efecto de parpadeo */
+  box-shadow: 0 4px 8px 0 rgb(14, 13, 13);
 }
 
 .verde {
   background-color: green;
   animation: parpadeo 0.5s infinite; /* Efecto de parpadeo */
+  box-shadow: 0 4px 8px 0 rgb(14, 13, 13);
 }
 .yellow {
   background-color: rgb(255, 255, 0);
   animation: parpadeo 0.5s infinite; /* Efecto de parpadeo */
+  box-shadow: 0 4px 8px 0 rgb(14, 13, 13);
+  color: black;
 }
 
 @keyframes parpadeo {
-  0%,
+  20%,
   100% {
     opacity: 1;
   }
-  50% {
+  60% {
     opacity: 0.5;
   }
+}
+.stickyButton {
+  position: sticky;
+  bottom: 20px; /* Ajusta según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50; /* Color de fondo */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Espaciado */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+}
+
+.stickyButton:hover {
+  background-color: #45a049; /* Color de fondo al pasar el mouse */
 }
 
 .tituloEstado label {
@@ -91,6 +112,10 @@
   align-content: center;
   align-self: center;
   padding-top: 20px;
+  text-shadow: 2px 2px 0px rgb(13, 13, 13),
+    /* Sombra hacia la derecha y abajo */ -2px -2px 0px rgb(10, 9, 9),
+    /* Sombra hacia la izquierda y arriba */ -2px 2px 0px rgb(12, 12, 12),
+    /* Sombra hacia la izquierda y abajo */ 2px -2px 0px rgb(19, 19, 19); /* Sombra hacia la derecha y arriba */
 }
 
 .estado {

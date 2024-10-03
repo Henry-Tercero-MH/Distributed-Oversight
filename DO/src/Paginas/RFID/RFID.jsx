@@ -145,7 +145,6 @@ const RFID = () => {
       nombre: conductorData.nombre,
       cui: conductorData.cui,
       nit: conductorData.nit,
-      estado: conductorData.estado,
       fotoVehiculo: vehiculoData.fotoVehiculo,
       fotoConductor: vehiculoData.fotoConductor,
       ubicacion: reporteData.ubicacion, // Se incluye la ubicación directamente
