@@ -6,6 +6,7 @@ import iconCalendar from "./calendar.png";
 import iconReloj from "./iconReloj.png";
 import iconUbicacion from "./iconUbicacion.png";
 import { getRFIDByPlate, generateLectura } from "./../../services/api"; // Asegúrate de que esta función esté bien implementada
+import { getRFIDByPlate, generateLectura } from "./../../services/api"; // Asegúrate de que esta función esté bien implementada
 import sonidoRojo from "./rojo.mp3";
 import sonidoVerde from "./verde.mp3";
 import sonidoAmarillo from "./amarillo.mp3";
@@ -123,7 +124,49 @@ const RFID = () => {
   }, [vehiculoData.estado]);
 
   const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault(); // Evita el comportamiento predeterminado del formulario
+
+    // Asegúrate de que los datos del vehículo, conductor y reporte están completos
+    if (!vehiculoData || !conductorData || !reporteData) {
+      console.error("Datos incompletos para enviar.");
+      return;
+    }
+
+    // Estructura de datos a enviar como un objeto
+    const datosAEnviar = {
+      uso: vehiculoData.uso,
+      tipo: vehiculoData.tipo,
+      linea: vehiculoData.linea,
+      chasis: vehiculoData.chasis,
+      serie: vehiculoData.serie,
+      asientos: vehiculoData.asientos,
+      color: vehiculoData.color,
+      placa: vehiculoData.placa,
+      modelo: vehiculoData.modelo,
+      nombre: conductorData.nombre,
+      estado: conductorData.estado,
+      cui: conductorData.cui,
+      nit: conductorData.nit,
+      fotoVehiculo: vehiculoData.fotoVehiculo,
+      fotoConductor: vehiculoData.fotoConductor,
+      ubicacion: reporteData.ubicacion, // Se incluye la ubicación directamente
+      fecha: reporteData.fecha,
+      hora: reporteData.hora,
+    };
+
+    // Aquí puedes agregar un console.log para verificar que los datos están bien
+    console.log("Datos a enviar:", datosAEnviar); // Log de los datos que se enviarán
+
+    try {
+      // Llama a la función para crear una nueva lectura
+      const resultado = await generateLectura(datosAEnviar);
+
+      // Manejo del resultado después de un envío exitoso
+      console.log("Datos enviados con éxito:", resultado);
+    } catch (error) {
+      console.error("Error al enviar los datos:", error);
+    }
 
     // Asegúrate de que los datos del vehículo, conductor y reporte están completos
     if (!vehiculoData || !conductorData || !reporteData) {
@@ -260,6 +303,9 @@ const RFID = () => {
           </div>
         </div>
       </form>
+      <button type="submit" onClick={handleSubmit}>
+        Enviar
+      </button>
       <button type="submit" onClick={handleSubmit}>
         Enviar
       </button>

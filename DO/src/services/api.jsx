@@ -184,6 +184,30 @@ export const createReporte = async (data) => {
     throw error;
   }
 };
+// Función para crear una nueva lectura
+export const generateLectura = async (data) => {
+  try {
+    console.log("Datos recibidos en la API:", data);
+    const response = await fetch(`${API_URL}/lecturas`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data), // Asegúrate de que 'data' contenga la estructura adecuada
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error al crear la lectura: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    return result; // Retorna el resultado de la creación de la lectura
+  } catch (error) {
+    console.error("Error al enviar los datos:", error);
+    throw error;
+  }
+};
+
 export const updateEstadoRfid = async (placa, estado) => {
   try {
     const response = await fetch(`${API_URL}/rfid/estado`, {
