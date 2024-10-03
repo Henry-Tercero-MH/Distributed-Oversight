@@ -143,6 +143,7 @@ const RFID = () => {
       placa: vehiculoData.placa,
       modelo: vehiculoData.modelo,
       nombre: conductorData.nombre,
+      estado: conductorData.estado,
       cui: conductorData.cui,
       nit: conductorData.nit,
       fotoVehiculo: vehiculoData.fotoVehiculo,
