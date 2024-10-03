@@ -5,12 +5,10 @@ import MostrarTexto from "../../componentes/LabelTexto/MostrarTexto";
 import iconCalendar from "./calendar.png";
 import iconReloj from "./iconReloj.png";
 import iconUbicacion from "./iconUbicacion.png";
-import { getRFIDByPlate, generateLectura } from "./../../services/api"; // Asegúrate de que esta función esté bien implementada
+import { getRFIDByPlate, generateLectura } from "./../../services/api";
 import sonidoRojo from "./rojo.mp3";
 import sonidoVerde from "./verde.mp3";
 import sonidoAmarillo from "./amarillo.mp3";
-// import sonidoVerde from "./verde.mp3"; // Asegúrate de tener este archivo
-// import sonidoAmarillo from "./amarillo.mp3"; // Asegúrate de tener este archivo
 
 const RFID = () => {
   const audioRojo = new Audio(sonidoRojo);
@@ -25,19 +23,25 @@ const RFID = () => {
     hora: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const [estadoClass, setEstadoClass] = useState(styles.default); // Clase CSS para el estado
+  const [estadoClass, setEstadoClass] = useState(styles.default);
 
   const fetchVehicleData = async (tagID) => {
     try {
       const data = await getRFIDByPlate(tagID);
-      console.log("Datos recibidos del API:", data); // Asegúrate de que estás recibiendo datos válidos
+      console.log("Datos recibidos del API:", data);
       if (data) {
         setVehiculoData(data);
-        setConductorData(data || {}); // Asegúrate de que 'conductor' sea una propiedad válida
+        setConductorData(data || {});
         setErrorMessage("");
 
         // Captura la ubicación y la fecha/hora
         captureLocationAndTime();
+
+        // Espera un momento para capturar la ubicación y la fecha antes de enviar
+        setTimeout(() => {
+          // Llama automáticamente a handleSubmit después de obtener los datos
+          handleSubmit();
+        }, 1000); // Agrega un pequeño retraso para asegurar que los datos estén listos
       } else {
         setErrorMessage("No se encontraron datos para esta placa.");
       }
@@ -84,54 +88,47 @@ const RFID = () => {
   };
 
   const handleRFIDInput = (event) => {
-    const tagID = event.target.value.trim(); // Captura el ID del RFID y elimina espacios
-    console.log("ID RFID ingresado:", tagID); // Log de depuración
+    const tagID = event.target.value.trim();
+    console.log("ID RFID ingresado:", tagID);
 
-    // Verifica si la tecla presionada es "Enter"
     if (event.key === "Enter") {
       if (tagID.length === 8) {
-        // Verifica si el ID tiene la longitud correcta
-        fetchVehicleData(tagID); // Llama a la función de búsqueda con el ID
-        event.target.value = ""; // Resetea el input para la siguiente lectura
+        fetchVehicleData(tagID);
+        event.target.value = "";
       } else {
-        setErrorMessage("El ID RFID debe tener 8 caracteres."); // Mensaje de error si la longitud es incorrecta
+        setErrorMessage("El ID RFID debe tener 8 caracteres.");
       }
-      event.preventDefault(); // Previene el refresco de la página
+      event.preventDefault();
     }
   };
 
-  // Efecto para enfocar el input oculto al montar el componente
   useEffect(() => {
     const input = document.getElementById("rfidInput");
     input.focus();
   }, []);
 
-  // Efecto para cambiar la clase de estado según el estado del vehículo
   useEffect(() => {
     if (vehiculoData.estado === "Reporte de Robo") {
-      setEstadoClass(`${styles.tituloEstado} ${styles.rojo}`); // Cambiar a rojo
+      setEstadoClass(`${styles.tituloEstado} ${styles.rojo}`);
       audioRojo.play();
     } else if (vehiculoData.estado === "Solvente") {
-      setEstadoClass(`${styles.tituloEstado} ${styles.verde}`); // Cambiar a verde
+      setEstadoClass(`${styles.tituloEstado} ${styles.verde}`);
       audioVerde.play();
     } else if (vehiculoData.estado === "Insolvente") {
-      setEstadoClass(`${styles.tituloEstado} ${styles.yellow}`); // Cambiar a amarillo
+      setEstadoClass(`${styles.tituloEstado} ${styles.yellow}`);
       audioAmarillo.play();
     } else {
-      setEstadoClass(styles.default); // Clase por defecto
+      setEstadoClass(styles.default);
     }
   }, [vehiculoData.estado]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Evita el comportamiento predeterminado del formulario
-
+  const handleSubmit = async () => {
     // Asegúrate de que los datos del vehículo, conductor y reporte están completos
     if (!vehiculoData || !conductorData || !reporteData) {
       console.error("Datos incompletos para enviar.");
       return;
     }
 
-    // Estructura de datos a enviar como un objeto
     const datosAEnviar = {
       uso: vehiculoData.uso,
       tipo: vehiculoData.tipo,
@@ -148,19 +145,15 @@ const RFID = () => {
       nit: conductorData.nit,
       fotoVehiculo: vehiculoData.fotoVehiculo,
       fotoConductor: vehiculoData.fotoConductor,
-      ubicacion: reporteData.ubicacion, // Se incluye la ubicación directamente
+      ubicacion: reporteData.ubicacion,
       fecha: reporteData.fecha,
       hora: reporteData.hora,
     };
 
-    // Aquí puedes agregar un console.log para verificar que los datos están bien
-    console.log("Datos a enviar:", datosAEnviar); // Log de los datos que se enviarán
+    console.log("Datos a enviar:", datosAEnviar);
 
     try {
-      // Llama a la función para crear una nueva lectura
       const resultado = await generateLectura(datosAEnviar);
-
-      // Manejo del resultado después de un envío exitoso
       console.log("Datos enviados con éxito:", resultado);
     } catch (error) {
       console.error("Error al enviar los datos:", error);
@@ -169,12 +162,12 @@ const RFID = () => {
 
   return (
     <section className={styles.contenedorFormulario}>
-      <form onSubmit={handleSubmit} className={styles.formulario}>
+      <form className={styles.formulario}>
         <input
           type="text"
           id="rfidInput"
           className={styles.hiddenInput}
-          onKeyPress={handleRFIDInput} // Usa onKeyPress para capturar la entrada completa
+          onKeyPress={handleRFIDInput}
           autoFocus
           style={{ position: "absolute", opacity: 0, height: 0 }}
         />
@@ -237,32 +230,28 @@ const RFID = () => {
             <MostrarTexto dato={conductorData.nombre || "N/A"}>
               Nombre
             </MostrarTexto>
+            <MostrarTexto dato={conductorData.estado || "N/A"}>
+              Estado
+            </MostrarTexto>
             <MostrarTexto dato={conductorData.cui || "N/A"}>CUI</MostrarTexto>
             <MostrarTexto dato={conductorData.nit || "N/A"}>NIT</MostrarTexto>
-
-            <div className={styles.datosTitulo}>
-              <Label>Datos del Reporte</Label>
-            </div>
-            <MostrarTexto dato={reporteData.ubicacion || "N/A"}>
-              <img
-                src={iconUbicacion}
-                alt="Ubicación"
-                width="40px"
-                height="40px"
-              />
-            </MostrarTexto>
-            <MostrarTexto dato={reporteData.fecha || "N/A"}>
-              <img src={iconCalendar} alt="Fecha" width="40px" height="40px" />
-            </MostrarTexto>
-            <MostrarTexto dato={reporteData.hora || "N/A"}>
-              <img src={iconReloj} alt="Hora" width="40px" height="40px" />
-            </MostrarTexto>
+          </div>
+        </div>
+        <div className={styles.reporte}>
+          <div>
+            <img src={iconUbicacion} alt="Ubicación" />
+            <Label>{reporteData.ubicacion || "Ubicación no disponible"}</Label>
+          </div>
+          <div>
+            <img src={iconCalendar} alt="Fecha" />
+            <Label>{reporteData.fecha || "Fecha no disponible"}</Label>
+          </div>
+          <div>
+            <img src={iconReloj} alt="Hora" />
+            <Label>{reporteData.hora || "Hora no disponible"}</Label>
           </div>
         </div>
       </form>
-      <button type="submit" onClick={handleSubmit}>
-        Enviar
-      </button>
     </section>
   );
 };
