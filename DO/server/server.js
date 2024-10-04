@@ -368,7 +368,23 @@ app.put("/api/rfid/estado", (req, res) => {
     }
   });
 });
+// Ruta para obtener todas las lecturas
+app.get("/api/lecturas", (req, res) => {
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err)
+      return res.status(500).json({ error: "Error al leer la base de datos." });
 
+    try {
+      const db = JSON.parse(data);
+      const lecturas = db.lecturas || [];
+      res.json(lecturas);
+    } catch (parseError) {
+      return res
+        .status(500)
+        .json({ error: "Error al procesar la base de datos." });
+    }
+  });
+});
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);

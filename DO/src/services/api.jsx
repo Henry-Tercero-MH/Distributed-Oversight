@@ -208,6 +208,26 @@ export const generateLectura = async (data) => {
   }
 };
 
+// Obtener las lecturas
+export const getLecturas = async () => {
+  try {
+    const response = await fetch(`${API_URL}/lecturas`, {
+      method: "GET", // Cambiamos a GET para obtener los datos
+    });
+
+    // Verifica si la respuesta es satisfactoria
+    if (!response.ok) {
+      throw new Error(`Error al obtener las lecturas: ${response.statusText}`);
+    }
+
+    const data = await response.json(); // Convierte la respuesta a JSON
+    return data; // Retorna las lecturas obtenidas
+  } catch (error) {
+    console.error("Error al obtener las lecturas:", error); // Muestra el error en la consola
+    throw error; // Lanza el error para que el componente que llama a esta función pueda manejarlo
+  }
+};
+
 export const updateEstadoRfid = async (placa, estado) => {
   try {
     const response = await fetch(`${API_URL}/rfid/estado`, {
