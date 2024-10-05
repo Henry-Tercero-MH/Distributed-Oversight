@@ -34,13 +34,15 @@ const Lecturas = () => {
     const ahora = new Date();
     return lecturas.filter((lectura) => {
       const fechaLectura = new Date(lectura.fecha); // Asegúrate de que la fecha está en formato correcto
+
       if (filtro === "dia") {
         return fechaLectura.toDateString() === ahora.toDateString();
       } else if (filtro === "semana") {
-        const inicioSemana = new Date(
-          ahora.setDate(ahora.getDate() - ahora.getDay())
-        );
-        const finSemana = new Date(ahora.setDate(inicioSemana.getDate() + 6));
+        const inicioSemana = new Date(ahora);
+        inicioSemana.setDate(inicioSemana.getDate() - inicioSemana.getDay()); // Inicio de la semana (Domingo)
+        const finSemana = new Date(inicioSemana);
+        finSemana.setDate(inicioSemana.getDate() + 6); // Fin de la semana (Sábado)
+
         return fechaLectura >= inicioSemana && fechaLectura <= finSemana;
       } else if (filtro === "mes") {
         return (
@@ -48,6 +50,7 @@ const Lecturas = () => {
           fechaLectura.getFullYear() === ahora.getFullYear()
         );
       }
+
       return true; // Retorna todas las lecturas si el filtro es "todo"
     });
   };
@@ -112,9 +115,20 @@ const Lecturas = () => {
                       <MostrarTexto dato={lectura.nit}>NIT</MostrarTexto>
                       <img src={lectura.fotoVehiculo} alt="Vehículo" />
                       <img src={lectura.fotoConductor} alt="Conductor" />
-                      <MostrarTexto dato={lectura.ubicacion}>
+                      <MostrarTexto
+                        dato={
+                          <a
+                            href={lectura.ubicacion}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Ver Ubicación
+                          </a>
+                        }
+                      >
                         Ubicación
                       </MostrarTexto>
+
                       <MostrarTexto dato={lectura.fecha}>Fecha</MostrarTexto>
                       <MostrarTexto dato={lectura.hora}>Hora</MostrarTexto>
                     </div>

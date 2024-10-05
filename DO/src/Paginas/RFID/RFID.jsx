@@ -63,14 +63,17 @@ const RFID = () => {
           const fecha = currentDate.toLocaleDateString();
           const hora = currentDate.toLocaleTimeString();
 
+          // Crea un enlace de Google Maps usando las coordenadas
+          const ubicacionEnlace = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
           setReporteData({
-            ubicacion: `Lat: ${latitude}, Lon: ${longitude}`,
+            ubicacion: ubicacionEnlace, // Guarda el enlace en lugar de las coordenadas
             fecha: fecha,
             hora: hora,
           });
 
           console.log("Datos después de la lectura:", {
-            ubicacion: `Lat: ${latitude}, Lon: ${longitude}`,
+            ubicacion: ubicacionEnlace,
             fecha: fecha,
             hora: hora,
           });
@@ -235,20 +238,20 @@ const RFID = () => {
             </MostrarTexto>
             <MostrarTexto dato={conductorData.cui || "N/A"}>CUI</MostrarTexto>
             <MostrarTexto dato={conductorData.nit || "N/A"}>NIT</MostrarTexto>
-          </div>
-        </div>
-        <div className={styles.reporte}>
-          <div>
-            <img src={iconUbicacion} alt="Ubicación" />
-            <Label>{reporteData.ubicacion || "Ubicación no disponible"}</Label>
-          </div>
-          <div>
-            <img src={iconCalendar} alt="Fecha" />
-            <Label>{reporteData.fecha || "Fecha no disponible"}</Label>
-          </div>
-          <div>
-            <img src={iconReloj} alt="Hora" />
-            <Label>{reporteData.hora || "Hora no disponible"}</Label>
+            <MostrarTexto
+              dato={reporteData.ubicacion || "Ubicación no disponible"}
+            >
+              <img src={iconUbicacion} width="40px" alt="" />
+            </MostrarTexto>
+            <MostrarTexto dato={reporteData.fecha || "Fecha no disponible"}>
+              {" "}
+              <img src={iconCalendar} width="50px" alt="" />{" "}
+            </MostrarTexto>
+
+            <MostrarTexto dato={reporteData.hora || "Hora no disponible"}>
+              {" "}
+              <img src={iconReloj} width="50px" alt="" />
+            </MostrarTexto>
           </div>
         </div>
       </form>
