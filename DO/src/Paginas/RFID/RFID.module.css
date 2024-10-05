@@ -137,7 +137,11 @@
 .contenedor2 {
   padding: 10px 10px;
 }
-
+.centrar label {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 /* Responsividad para tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
   .contenedorFormulario {

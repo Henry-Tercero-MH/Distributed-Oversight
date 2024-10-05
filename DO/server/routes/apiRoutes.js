@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 
 const dbPath = path.join(__dirname, "../data/db.json");
 
@@ -352,6 +353,17 @@ router.post("/lecturas", (req, res) => {
       res.status(500).json({ error: "Error al procesar la base de datos" });
     }
   });
+});
+// Obtener todas las lecturas RFID
+router.get("/lecturas", (req, res) => {
+  try {
+    const db = readDb();
+    res.json({ success: true, data: db.lecturas });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error al obtener lecturas." });
+  }
 });
 
 module.exports = router;
