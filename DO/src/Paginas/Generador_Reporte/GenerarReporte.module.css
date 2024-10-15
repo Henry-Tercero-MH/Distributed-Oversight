@@ -1,3 +1,4 @@
+/* Estilos generales */
 .cajaGenerarReporte {
   width: 100%;
   display: block;
@@ -107,4 +108,66 @@ button {
 
 .captureButton:hover {
   background-color: #0056b3;
+}
+
+/* Responsividad para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .cajaFormularioGenerarReporte {
+    margin-top: 150px;
+    width: 700px;
+    font-size: 24px;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .cajaFormularioGenerarReporte label {
+    font-size: 42px;
+  }
+  .cajaFormularioGenerarReporte ::placeholder {
+    font-size: 32px;
+  }
+
+  .titulo label {
+    font-size: 32px;
+  }
+
+  .cajaIngresodatos input,
+  select {
+    height: 60px;
+    font-size: 40px;
+  }
+
+  input {
+    height: 60px;
+  }
+
+  .cajaIngresodatos ::placeholder {
+    font-size: 20px;
+  }
+
+  select {
+    height: 60px;
+    font-size: 20px;
+  }
+
+  button {
+    height: 60px;
+    font-size: 20px;
+  }
+
+  .modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+  }
+
+  .modalContent {
+    padding: 10px;
+  }
+
+  .captureButton {
+    padding: 8px 12px;
+    font-size: 18px;
+  }
 }

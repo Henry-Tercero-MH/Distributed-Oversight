@@ -222,6 +222,7 @@
   .menu {
     top: 100px; /* Mueve el menú debajo del header en pantallas más grandes */
   }
+
   .contenedorFormulario {
     width: 100%;
     display: inline-block;
@@ -230,6 +231,7 @@
     border-radius: 15px 15px;
     overflow: hidden;
     gap: 50px;
+    margin-top: 0px;
   }
   .cajaSemaforo {
     height: 120px;

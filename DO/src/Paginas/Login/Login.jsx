@@ -80,8 +80,8 @@ const Login = () => {
         </div>
         {error && <p className={styles.error}>{error}</p>}
         <div className={styles.cajaInfo}>
-          <Input type="checkbox" />
-          <p>Recordar usuario</p>
+          {/* <Input type="checkbox" />
+          <p>Recordar usuario</p> */}
           <Link to="/Reset">
             <div className={styles.items}>
               <p>¿Olvidó su contraseña?</p>

@@ -39,6 +39,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
 }
 
 /* Estilos del formulario y los inputs */
@@ -161,5 +162,9 @@ form button:hover {
 
   .menu {
     top: 100px; /* Mueve el menú debajo del header en pantallas más grandes */
+    margin-top: 100px;
+  }
+  .formulario {
+    margin-top: 100px;
   }
 }
