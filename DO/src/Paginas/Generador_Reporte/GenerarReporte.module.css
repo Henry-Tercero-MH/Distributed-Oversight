@@ -44,6 +44,7 @@ select {
   height: 80px;
   margin-bottom: 5px;
   box-shadow: var(--box-shadowInput);
+  font-size: 30px;
 }
 
 input {
