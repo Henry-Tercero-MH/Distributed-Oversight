@@ -10,12 +10,19 @@ import sonidoRojo from "./rojo.mp3";
 import sonidoVerde from "./verde.mp3";
 import sonidoAmarillo from "./amarillo.mp3";
 import { useAuth } from "../../context/AuthContext"; // Asegúrate de la ruta correcta
+import AccessDenied from "../../componentes/AccessDenied";
+import imag from "..//..//../public/denegado.jpeg"; // Ajusta la ruta de la imagen
 
 const RFID = () => {
   const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
 
   if (!isAuthenticated) {
-    return <p>Acceso denegado. Por favor, inicia sesión.</p>; // Mensaje para usuarios no autenticados
+    return (
+      <AccessDenied
+        message="Acceso denegado. Por favor, inicia sesión."
+        imageUrl={imag} // Ajusta la ruta de la imagen
+      />
+    );
   }
   const audioRojo = new Audio(sonidoRojo);
   const audioVerde = new Audio(sonidoVerde);
