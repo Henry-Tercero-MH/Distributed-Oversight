@@ -7,6 +7,7 @@ import iconUser from "./bx-user.svg.png";
 import iconPassword from "./bxs-lock.svg.png";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/api"; // Asegúrate de que esta importación sea correcta
+import { useAuth } from "../../context/AuthContext"; // Asegúrate de la ruta correcta
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -14,14 +15,16 @@ const Login = () => {
   const [error, setError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth(); // Obtén la función de login del contexto
 
   useEffect(() => {
-    if (username !== "" && password !== "") {
+    const isEmailValid = username.includes("@") && username.includes(".");
+    if (isEmailValid && password !== "") {
       setIsFormValid(true);
       setError("");
     } else {
       setIsFormValid(false);
-      setError("Por favor, completa todos los campos.");
+      setError("Por favor, completa todos los campos correctamente.");
     }
   }, [username, password]);
 
@@ -36,6 +39,7 @@ const Login = () => {
       const data = await loginUser(username, password);
 
       if (data.success) {
+        login(); // Llama a la función de login para actualizar el estado de autenticación
         navigate("/RFID");
       } else {
         setError(data.message || "Credenciales incorrectas");
@@ -44,8 +48,9 @@ const Login = () => {
       setError(err.message || "Error al autenticar el usuario");
     }
 
-    setUsername("");
-    setPassword("");
+    // Solo limpia los campos si el inicio de sesión es exitoso
+    // setUsername("");
+    // setPassword("");
   };
 
   return (
@@ -64,6 +69,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="example@gmail.com"
+            required // Agrega esta propiedad
           />
         </div>
         <div className={styles.cajaTexto}>
@@ -76,6 +82,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Escribe tu contraseña..."
+            required // Agrega esta propiedad
           />
         </div>
         {error && <p className={styles.error}>{error}</p>}

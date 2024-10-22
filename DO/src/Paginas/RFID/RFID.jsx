@@ -9,8 +9,14 @@ import { getRFIDByPlate, generateLectura } from "./../../services/api";
 import sonidoRojo from "./rojo.mp3";
 import sonidoVerde from "./verde.mp3";
 import sonidoAmarillo from "./amarillo.mp3";
+import { useAuth } from "../../context/AuthContext"; // Asegúrate de la ruta correcta
 
 const RFID = () => {
+  const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
+
+  if (!isAuthenticated) {
+    return <p>Acceso denegado. Por favor, inicia sesión.</p>; // Mensaje para usuarios no autenticados
+  }
   const audioRojo = new Audio(sonidoRojo);
   const audioVerde = new Audio(sonidoVerde);
   const audioAmarillo = new Audio(sonidoAmarillo);

@@ -6,8 +6,13 @@ import SelectList from "../../componentes/Lista_Opciones/ListaOpciones";
 import poto from "./capturaFoto.jpeg";
 import { createReporte, updateEstadoRfid } from "../../services/api"; // Asegúrate de que esta importación sea correcta
 import { useNavigate } from "react-router-dom"; // Asegúrate de importar useNavigate
-
+import { useAuth } from "../../context/AuthContext"; // Asegúrate de la ruta correcta
 const GenerarReporte = () => {
+  const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
+
+  if (!isAuthenticated) {
+    return <p>Acceso denegado. Por favor, inicia sesión.</p>; // Mensaje para usuarios no autenticados
+  }
   const [estado, setEstado] = useState("");
   const [placa, setPlaca] = useState("");
   const [cui, setCui] = useState("");
