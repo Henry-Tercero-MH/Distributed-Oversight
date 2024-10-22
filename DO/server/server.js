@@ -8,8 +8,8 @@ const port = 3001;
 // Importa uuid al principio de tu archivo
 const { v4: uuidv4 } = require("uuid");
 
-// Usa cors para permitir solicitudes desde otros dominios
-app.use(cors());
+// Usa cors para permitir solicitudes desde cualquier dominio
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // Ruta al archivo db.json dentro de la carpeta data
@@ -488,6 +488,6 @@ app.put("/api/usuarios/cambiar-contrasena", (req, res) => {
 });
 
 // Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Servidor corriendo en http://0.0.0.0:${port}`);
 });
