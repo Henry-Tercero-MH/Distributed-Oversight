@@ -385,6 +385,58 @@ app.get("/api/lecturas", (req, res) => {
     }
   });
 });
+// Ruta para agregar un nuevo usuario
+app.post("/api/usuarios", (req, res) => {
+  const nuevoUsuario = req.body;
+
+  // Validar que se hayan proporcionado todos los campos requeridos
+  if (!nuevoUsuario.email || !nuevoUsuario.contraseña || !nuevoUsuario.nombre) {
+    return res.status(400).json({ error: "Faltan datos requeridos." });
+  }
+
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error al leer la base de datos:", err);
+      return res.status(500).json({ error: "Error al leer la base de datos" });
+    }
+
+    try {
+      const db = JSON.parse(data);
+      db.usuarios = db.usuarios || []; // Asegúrate de que existe 'usuarios'
+
+      // Verificar si el email ya existe
+      const emailExists = db.usuarios.some(
+        (user) => user.email === nuevoUsuario.email
+      );
+      if (emailExists) {
+        return res.status(400).json({ error: "El email ya está registrado." });
+      }
+
+      // Generar el nuevo usuario con un ID único usando uuid
+      const nuevoUsuarioConId = {
+        id: uuidv4(), // Generar un nuevo ID único
+        ...nuevoUsuario, // Usar el resto de los datos del nuevo usuario
+      };
+
+      // Agregar el nuevo usuario
+      db.usuarios.push(nuevoUsuarioConId);
+
+      // Guardar las actualizaciones en db.json
+      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
+        if (err) {
+          console.error("Error al guardar el usuario:", err);
+          return res.status(500).json({ error: "Error al guardar el usuario" });
+        }
+
+        res.status(201).json(nuevoUsuarioConId); // Responder con el nuevo usuario creado
+      });
+    } catch (parseError) {
+      console.error("Error al procesar la base de datos:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos" });
+    }
+  });
+});
+
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);

@@ -99,6 +99,17 @@
       "confirmacionContraseña": "Passw0rd.",
       "nip": "123242",
       "cui": "2538992730919"
+    },
+    {
+      "id": "b72cb250-c0c8-4a35-9bad-4b95cb264d04",
+      "nombre": "Bruce",
+      "apellido": "Lee",
+      "email": "blee@gmail.com",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12345",
+      "cui": "2538992730919"
     }
   ],
   "lecturas": [

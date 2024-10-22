@@ -365,5 +365,31 @@ router.get("/lecturas", (req, res) => {
       .json({ success: false, message: "Error al obtener lecturas." });
   }
 });
+// Crear nuevo usuario
+router.post("/usuarios", (req, res) => {
+  const db = readDb();
+  const nuevoUsuario = req.body;
+
+  // Generar un UUID como ID único para el nuevo usuario
+  nuevoUsuario.id = uuidv4();
+
+  db.usuarios.push(nuevoUsuario);
+  writeDb(db);
+
+  res.status(201).json(nuevoUsuario);
+});
+// Obtener usuario por ID
+router.get("/usuarios/:id", (req, res) => {
+  const db = readDb();
+
+  // Buscar el usuario usando UUID
+  const usuario = db.usuarios.find((u) => u.id === req.params.id);
+
+  if (usuario) {
+    res.json({ success: true, data: usuario });
+  } else {
+    res.status(404).json({ success: false, message: "Usuario no encontrado" });
+  }
+});
 
 module.exports = router;
