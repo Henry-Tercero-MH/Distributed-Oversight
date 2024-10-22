@@ -19,7 +19,9 @@ const Header = () => {
     <>
       <header className={styles.header}>
         <div className={styles.cajaHeader}>
-          <img src={logo} className={styles.logo} alt="logo" />
+          <Link to="/Login">
+            <img src={logo} className={styles.logo} alt="logo" />
+          </Link>
           <img
             src={iconMenu}
             className={styles.iconMenu}

@@ -4,8 +4,20 @@ import Input from "../../componentes/Input/Input";
 import Label from "../../componentes/Label/Label";
 import MostrarTexto from "../../componentes/LabelTexto/MostrarTexto";
 import { getLecturas } from "../../services/api"; // Importa la función getLecturas
-
+import { useAuth } from "../../context/AuthContext"; // Asegúrate de la ruta correcta
+import AccessDenied from "../../componentes/AccessDenied";
+import imag from "..//..//../public/denegado.jpeg"; // Ajusta la ruta de la imagen
 const Lecturas = () => {
+  const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
+
+  if (!isAuthenticated) {
+    return (
+      <AccessDenied
+        message="Acceso denegado. Por favor, inicia sesión."
+        imageUrl={imag} // Ajusta la ruta de la imagen
+      />
+    );
+  }
   const [lecturas, setLecturas] = useState([]); // Estado para almacenar las lecturas
   const [error, setError] = useState(null); // Estado para manejar errores
   const [detallesVisible, setDetallesVisible] = useState(null); // Estado para manejar la visibilidad de los detalles

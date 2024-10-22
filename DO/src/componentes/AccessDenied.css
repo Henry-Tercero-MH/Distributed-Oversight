@@ -1,0 +1,22 @@
+/* AccessDenied.css */
+.access-denied {
+  position: relative;
+  text-align: center; /* Centra el texto */
+}
+
+.access-denied-image {
+  width: 100%; /* O el tamaño que prefieras */
+  height: auto;
+  margin-top: 90px;
+}
+
+.access-denied-message {
+  position: absolute; /* Permite que el texto se coloque encima de la imagen */
+  top: 50%; /* Ajusta la posición según sea necesario */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el texto */
+  color: white; /* Cambia el color según el fondo */
+  font-size: 42px; /* Ajusta el tamaño del texto */
+  font-weight: bold;
+  background-color: rgb(0, 0, 0, 0.8);
+}

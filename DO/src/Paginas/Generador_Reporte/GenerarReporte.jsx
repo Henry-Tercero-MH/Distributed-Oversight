@@ -6,8 +6,20 @@ import SelectList from "../../componentes/Lista_Opciones/ListaOpciones";
 import poto from "./capturaFoto.jpeg";
 import { createReporte, updateEstadoRfid } from "../../services/api"; // Asegúrate de que esta importación sea correcta
 import { useNavigate } from "react-router-dom"; // Asegúrate de importar useNavigate
-
+import { useAuth } from "../../context/AuthContext"; // Asegúrate de la ruta correcta
+import imag from "..//..//../public/denegado.jpeg"; // Ajusta la ruta de la imagen
+import AccessDenied from "../../componentes/AccessDenied";
 const GenerarReporte = () => {
+  const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
+
+  if (!isAuthenticated) {
+    return (
+      <AccessDenied
+        message="Acceso denegado. Por favor, inicia sesión."
+        imageUrl={imag} // Ajusta la ruta de la imagen
+      />
+    );
+  }
   const [estado, setEstado] = useState("");
   const [placa, setPlaca] = useState("");
   const [cui, setCui] = useState("");
