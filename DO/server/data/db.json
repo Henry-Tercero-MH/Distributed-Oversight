@@ -53,32 +53,12 @@
     {
       "nombre": "Henry Misael Tercero",
       "apellido": "Hernández",
-      "email": "hterceroh@miumg.edu.gt",
-      "puesto": "Comisario",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "12345",
-      "cui": "1213124"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
       "email": "htercerohjsds@miumg.edu.gt",
       "puesto": "Analista de Datos",
       "contraseña": "Passw0rd.",
       "confirmacionContraseña": "Passw0rd.",
       "nip": "12323",
       "cui": "123213"
-    },
-    {
-      "nombre": "Henry Misael Tercero",
-      "apellido": "Hernández",
-      "email": "htercerdoh@miumg.edu.gt",
-      "puesto": "Civil",
-      "contraseña": "Passw0rd.",
-      "confirmacionContraseña": "Passw0rd.",
-      "nip": "12323",
-      "cui": "2538992730919"
     },
     {
       "nombre": "Henry Misael Tercero",
@@ -109,6 +89,39 @@
       "contraseña": "Passw0rd.",
       "confirmacionContraseña": "Passw0rd.",
       "nip": "12345",
+      "cui": "2538992730919"
+    },
+    {
+      "id": "87ed7d8a-7fcf-46e7-a8dd-796f257a8a59",
+      "nombre": "luis",
+      "apellido": "sales",
+      "email": "hterceroh@miumg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12345",
+      "cui": "2538992730919"
+    },
+    {
+      "id": "cfc802d5-9539-49e1-8c3c-a15e8ef0d11f",
+      "nombre": "Henry Misael Tercero",
+      "apellido": "Hernández",
+      "email": "htercerohh@miumg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12345",
+      "cui": "2538992730919"
+    },
+    {
+      "id": "08c2826f-f71d-47a8-9fb4-c4b5eb101b54",
+      "nombre": "Henry Misael",
+      "apellido": "Tercero Hernandez",
+      "email": "htercerooh@miumg.edu.gt",
+      "puesto": "Civil",
+      "contraseña": "Passw0rd.",
+      "confirmacionContraseña": "Passw0rd.",
+      "nip": "12234",
       "cui": "2538992730919"
     }
   ],

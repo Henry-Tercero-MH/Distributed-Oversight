@@ -391,5 +391,64 @@ router.get("/usuarios/:id", (req, res) => {
     res.status(404).json({ success: false, message: "Usuario no encontrado" });
   }
 });
+// services/api.js
+
+// services/api.js
+export const requestPasswordReset = async (email) => {
+  const response = await fetch("/api/request-password-reset", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error en la solicitud de restablecimiento de contraseña");
+  }
+
+  return await response.json();
+};
+
+// Actualizar la contraseña del usuario
+router.put("/usuarios/cambiar-contrasena", (req, res) => {
+  const { email, nuevaContraseña } = req.body; // Obtener el email y la nueva contraseña desde el cuerpo de la solicitud
+
+  // Validar que se hayan proporcionado el email y la nueva contraseña
+  if (!email || !nuevaContraseña) {
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "Email y nueva contraseña son requeridos.",
+      });
+  }
+
+  try {
+    const db = readDb(); // Función para leer la base de datos
+
+    // Buscar el usuario según el email
+    const usuario = db.usuarios.find((u) => u.email === email);
+
+    if (!usuario) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Usuario no encontrado." });
+    }
+
+    // Actualizar la contraseña del usuario
+    usuario.contraseña = nuevaContraseña; // Considera hashear la contraseña antes de guardarla
+
+    // Guardar los cambios en el archivo `db.json`
+    writeDb(db); // Función para guardar los cambios en la base de datos
+
+    // Devolver el usuario actualizado
+    res.json({ success: true, data: usuario });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error al actualizar la contraseña." });
+  }
+});
 
 module.exports = router;

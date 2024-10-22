@@ -436,6 +436,56 @@ app.post("/api/usuarios", (req, res) => {
     }
   });
 });
+// Endpoint para actualizar la contraseña del usuario
+app.put("/api/usuarios/cambiar-contrasena", (req, res) => {
+  const { email, nuevaContrasena } = req.body;
+
+  // Validar que se hayan proporcionado el email y la nueva contraseña
+  if (!email || !nuevaContrasena) {
+    return res
+      .status(400)
+      .json({ error: "Email y nueva contraseña son requeridos." });
+  }
+
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err)
+      return res.status(500).json({ error: "Error al leer la base de datos." });
+
+    try {
+      const db = JSON.parse(data);
+      if (!db.usuarios || !Array.isArray(db.usuarios)) {
+        return res.status(500).json({
+          error: "La base de datos no contiene usuarios válidos.",
+        });
+      }
+
+      // Buscar el usuario por email
+      const usuario = db.usuarios.find((u) => u.email === email);
+
+      if (!usuario) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Usuario no encontrado." });
+      }
+
+      // Actualizar la contraseña del usuario
+      usuario.contraseña = nuevaContrasena;
+
+      // Guardar los cambios en el archivo db.json
+      fs.writeFile(dbPath, JSON.stringify(db, null, 2), (err) => {
+        if (err)
+          return res
+            .status(500)
+            .json({ error: "Error al guardar la nueva contraseña." });
+
+        res.json({ success: true, data: usuario });
+      });
+    } catch (parseError) {
+      console.error("Error al procesar la base de datos:", parseError);
+      res.status(500).json({ error: "Error al procesar la base de datos." });
+    }
+  });
+});
 
 // Iniciar el servidor
 app.listen(port, () => {
