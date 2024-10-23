@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api"; // Cambia esto a la URL de tu API
+const API_URL = "https://backend-do-production.up.railway.app/api"; // Cambia esto a la URL de tu API
 
 // Función para autenticar un usuario
 export const loginUser = async (email, password) => {
