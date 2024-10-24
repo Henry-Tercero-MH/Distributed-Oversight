@@ -267,7 +267,7 @@ export const updateEstadoRfid = async (placa, estado) => {
 export const getRFIDByPlate = async (placa) => {
   try {
     const response = await fetch(
-      `${API_URL}/rfid?placa=${encodeURIComponent(placa)}`
+      `${API_URL}/?placa=${encodeURIComponent(placa)}`
     );
 
     if (!response.ok) {
