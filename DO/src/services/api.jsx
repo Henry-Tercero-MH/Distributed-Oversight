@@ -1,4 +1,4 @@
-const API_URL = "https://backend-do-production.up.railway.app/api"; // Cambia esto a la URL de tu API
+const API_URL = "https://backend-do-production.up.railway.app/api";
 
 // Función para autenticar un usuario
 export const loginUser = async (email, password) => {
@@ -266,9 +266,7 @@ export const updateEstadoRfid = async (placa, estado) => {
 
 export const getRFIDByPlate = async (placa) => {
   try {
-    const response = await fetch(
-      `${API_URL}/?placa=${encodeURIComponent(placa)}`
-    );
+    const response = await fetch(`${API_URL}/rfid?placa=${placa}`);
 
     if (!response.ok) {
       throw new Error("Error al obtener la información del vehículo");
