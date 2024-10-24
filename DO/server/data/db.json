@@ -2675,7 +2675,7 @@
       "nombre": "Pedro Martínez",
       "cui": "1234567890126",
       "nit": "789456123",
-      "estado": "Solvente",
+      "estado": "Reporte de Robo",
       "fotoVehiculo": "https://img.freepik.com/fotos-premium/camion-carga-camion-verde-sobre-fondo-blanco_899263-423.jpg?w=740",
       "fotoConductor": "https://www.labsaenzrenauld.com/wp-content/uploads/2020/10/Perfil-hombre-ba%CC%81sico_738242395.jpg"
     },
@@ -2733,6 +2733,13 @@
       "cui": "2538992730919",
       "estado": "Reporte de Robo",
       "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1729376298172-captura.jpg"
+    },
+    {
+      "id": 6,
+      "placa": "08406955",
+      "cui": "1234",
+      "estado": "Reporte de Robo",
+      "photo": "C:\\Users\\DELL\\Desktop\\Proyecto PGA2_Documentos\\DO\\server\\uploads\\1729780122490-captura.jpg"
     }
   ]
 }

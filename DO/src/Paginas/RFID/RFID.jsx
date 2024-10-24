@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import styles from "./RFID.module.css";
 import Label from "../../componentes/Label/Label";
 import MostrarTexto from "../../componentes/LabelTexto/MostrarTexto";

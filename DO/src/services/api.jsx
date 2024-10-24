@@ -1,4 +1,4 @@
-const API_URL = "https://backend-do-production.up.railway.app/api";
+const API_URL = "https://back-do-production.up.railway.app/api";
 
 // Función para autenticar un usuario
 export const loginUser = async (email, password) => {
